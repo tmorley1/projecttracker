@@ -11,7 +11,6 @@ output$project<- DT::renderDataTable({
     formatStyle('incomplete', target='row', backgroundColor=styleEqual(c(T,F), c('red', '')))
 }, server = FALSE, selection='single')
 
-
 peopleData <- function() {
   peopleData <- as.data.frame(read.csv(paste(dataPathway, "People.csv", sep="")))
   peopleData

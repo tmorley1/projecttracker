@@ -29,6 +29,11 @@ tabPanel("Edit info", #button in navigation panel
            )
          ),
          fluidRow(
+           column(12,
+                  h4("Rows in red show projects that are incomplete and do not have any current team members assigned")
+            )
+          ),
+         fluidRow(
            column(10,
                   dataTableOutput("project"),
                   br(),
