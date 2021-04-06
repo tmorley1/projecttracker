@@ -3,9 +3,8 @@
 # Rendering the 2 tables and re-establishing the functions
 output$people <- DT::renderDataTable(peopleData() %>% filter(CurrentlyInTeam == "TRUE") %>% select(-CurrentlyInTeam), server = FALSE, selection='single')
 output$project <- DT::renderDataTable({
-  dat <- datatable(projectData()) %>%
-    select(-Comments, -Documentation) %>%
-    formatStyle('Completed', target='row', backgroundColor=styleEqual(c(FALSE,TRUE), c('gray', 'yellow')))
+  dat <- datatable(projectData()%>%select(-Comments, -Documentation)) %>%
+    formatStyle('Completed', target='row', backgroundColor=styleEqual(c(FALSE,TRUE), c('red', '')))
   return(dat)
   }, server = FALSE, selection='single')
 
