@@ -2,16 +2,31 @@
 
 # Rendering the 2 tables and re-establishing the functions
 output$people <- DT::renderDataTable(peopleData() %>% filter(CurrentlyInTeam == "TRUE") %>% select(-CurrentlyInTeam), server = FALSE, selection='single')
-output$project <- DT::renderDataTable({
-  dat <- datatable(projectData()%>%select(-Comments, -Documentation)) %>%
-    formatStyle('Completed', target='row', backgroundColor=styleEqual(c(FALSE,TRUE), c('red', '')))
-  return(dat)
-  }, server = FALSE, selection='single')
+output$project<- DT::renderDataTable({
+  dat1 <-datatable(projectData()%>%
+                     select(-Comments, -Documentation)%>%
+                     mutate(in_team = ifelse(TeamMembers %in% list_current(), T, F))%>%
+                     mutate(incomplete = ifelse(Completed == F & in_team == F, T, F))%>%
+                     select(-in_team), options=list(columnDefs = list(list(visible=FALSE, targets=c(12)))))%>%
+    formatStyle('incomplete', target='row', backgroundColor=styleEqual(c(T,F), c('red', '')))
+}, server = FALSE, selection='single')
 
 
 peopleData <- function() {
   peopleData <- as.data.frame(read.csv(paste(dataPathway, "People.csv", sep="")))
   peopleData
+}
+
+people_current <- function() {
+  people_current<- peopleData()%>%
+    filter(CurrentlyInTeam == TRUE)%>%
+    select(-CurrentlyInTeam,-Team)
+  people_current
+}
+
+list_current <- function() {
+  list_current <- list(people_current()$Name)[[1]]
+  list_current
 }
 
 projectData <- function() {
