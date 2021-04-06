@@ -116,23 +116,23 @@ projectDetails <- function(dataSource, inputRow) {
   
   
 }
-C:\Users\tmorley\OneDrive - Department for Education\Documents\Projects\Project Tracker\project_tracker
+
 # App ---------------------------------------------------------------------
-C:\Users\tmorley\OneDrive - Department for Education\Documents - Strategic Operations Analysis Division\General\Project Tracker\ui
+
 ui <- navbarPage("Project Management",
                  theme = shinytheme("united"),
-                 source(paste("C:\\Users\\", username, "\\OneDrive - Department for Education\\Documents\\Projects\\Project Tracker\\project_tracker\\ui\\TeamOverview.R", sep=""), local=TRUE)$value,
-                 source(paste("C:\\Users\\", username, "\\OneDrive - Department for Education\\Documents\\Projects\\Project Tracker\\project_tracker\\ui\\PersonOverview.R", sep=""), local=TRUE)$value,
-                 source(paste("C:\\Users\\", username, "\\OneDrive - Department for Education\\Documents\\Projects\\Project Tracker\\project_tracker\\ui\\Timeline.R", sep=""), local=TRUE)$value,
-                 source(paste("C:\\Users\\", username, "\\OneDrive - Department for Education\\Documents\\Projects\\Project Tracker\\project_tracker\\ui\\Home.R", sep=""), local=TRUE)$value,            
+                 source(paste("C:\\Users\\", username, "\\OneDrive - Department for Education\\Documents\\Projects\\Project Tracker\\project_tracker\\ui\\TeamOverview_TM.R", sep=""), local=TRUE)$value,
+                 source(paste("C:\\Users\\", username, "\\OneDrive - Department for Education\\Documents\\Projects\\Project Tracker\\project_tracker\\ui\\PersonOverview_TM.R", sep=""), local=TRUE)$value,
+                 source(paste("C:\\Users\\", username, "\\OneDrive - Department for Education\\Documents\\Projects\\Project Tracker\\project_tracker\\ui\\Timeline_TM.R", sep=""), local=TRUE)$value,
+                 source(paste("C:\\Users\\", username, "\\OneDrive - Department for Education\\Documents\\Projects\\Project Tracker\\project_tracker\\ui\\Home_TM.R", sep=""), local=TRUE)$value,            
                  tags$head(tags$style("h5{color: red;}")) # making error messages red
 )
 
 server <- function(input, output, session) {
-  source(paste("C:\\Users\\", username, "\\OneDrive - Department for Education\\Documents\\Projects\\Project Tracker\\project_tracker\\server\\Home.R", sep=""), local=TRUE)$value
-  source(paste("C:\\Users\\", username, "\\OneDrive - Department for Education\\Documents\\Projects\\Project Tracker\\project_tracker\\server\\TeamOverview.R", sep=""), local=TRUE)$value
-  source(paste("C:\\Users\\", username, "\\OneDrive - Department for Education\\Documents\\Projects\\Project Tracker\\project_tracker\\server\\PersonOverview.R", sep=""), local=TRUE)$value
-  source(paste("C:\\Users\\", username, "\\OneDrive - Department for Education\\Documents\\Projects\\Project Tracker\\project_tracker\\server\\Timeline.R", sep=""), local=TRUE)$value
+  source(paste("C:\\Users\\", username, "\\OneDrive - Department for Education\\Documents\\Projects\\Project Tracker\\project_tracker\\server\\Home_TM.R", sep=""), local=TRUE)$value
+  source(paste("C:\\Users\\", username, "\\OneDrive - Department for Education\\Documents\\Projects\\Project Tracker\\project_tracker\\server\\TeamOverview_TM.R", sep=""), local=TRUE)$value
+  source(paste("C:\\Users\\", username, "\\OneDrive - Department for Education\\Documents\\Projects\\Project Tracker\\project_tracker\\server\\PersonOverview_TM.R", sep=""), local=TRUE)$value
+  source(paste("C:\\Users\\", username, "\\OneDrive - Department for Education\\Documents\\Projects\\Project Tracker\\project_tracker\\server\\Timeline_TM.R", sep=""), local=TRUE)$value
   
 }
 
