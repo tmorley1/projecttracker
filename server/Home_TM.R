@@ -2,7 +2,12 @@
 
 # Rendering the 2 tables and re-establishing the functions
 output$people <- DT::renderDataTable(peopleData() %>% filter(CurrentlyInTeam == "TRUE") %>% select(-CurrentlyInTeam), server = FALSE, selection='single')
-output$project <- DT::renderDataTable(projectData() %>% select(-Comments, -Documentation), server = FALSE, selection='single')
+output$project <- DT::renderDataTable({
+  dat <- datatable(projectData()) %>%
+    select(-Comments, -Documentation) %>%
+    formatStyle('Completed', target='row', backgroundColor=styleEqual(c(FALSE,TRUE), c('gray', 'yellow')))
+  return(dat)
+  }, server = FALSE, selection='single')
 
 
 peopleData <- function() {
@@ -11,8 +16,7 @@ peopleData <- function() {
 }
 
 projectData <- function() {
-  projectData <- as.data.frame(read.csv(paste(dataPathway, "Projects.csv", sep=""))) %>%
-    formatStyle('Completed', target='row', backgroundColor=styleEqual(c(FALSE,TRUE), c('gray', 'yellow'))
+  projectData <- as.data.frame(read.csv(paste(dataPathway, "Projects.csv", sep="")))
   projectData
 }
  

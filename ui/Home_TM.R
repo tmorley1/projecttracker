@@ -30,7 +30,7 @@ tabPanel("Edit info", #button in navigation panel
          ),
          fluidRow(
            column(10,
-                  DT::dataTableOutput("project"),
+                  dataTableOutput("project"),
                   br(),
                   actionButton("addProject", "Insert New Project"),
                   br(),
