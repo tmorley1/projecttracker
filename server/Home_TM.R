@@ -11,7 +11,8 @@ peopleData <- function() {
 }
 
 projectData <- function() {
-  projectData <- as.data.frame(read.csv(paste(dataPathway, "Projects.csv", sep="")))
+  projectData <- as.data.frame(read.csv(paste(dataPathway, "Projects.csv", sep=""))) %>%
+    formatStyle('Completed', target='row', backgroundColor=styleEqual(c(FALSE,TRUE), c('gray', 'yellow'))
   projectData
 }
  
@@ -81,7 +82,7 @@ observeEvent(input$addPerson, {
     conditionalPanel(
       condition = "output.newNameHasBeenRemoved == 'TRUE'",
       h5("This Team Member was previously deleted, to reinstate them click confirm"),
-      h5("Otherwise to avoid merging the 2 different team members`` projects together, please choose a different name")
+      h5("Otherwise to avoid merging the 2 different team members' projects together, please choose a different name")
     ),
     conditionalPanel(
       condition = "output.newTeamNameBlank == 'TRUE'",
