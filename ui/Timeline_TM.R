@@ -13,8 +13,7 @@ tabPanel("Timeline",
                              uiOutput("TimelineTeamMemberSelector")
                       ),
                       column(2,
-                             uiOutput("TimelineCompletedProjects"),
-                             
+                             uiOutput("TimelineCompletedProjects")
                       )
                     )
                 )
