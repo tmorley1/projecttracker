@@ -21,16 +21,15 @@ output$ganntChart <- renderPlot(
 
 output$TimeLineTable <- DT::renderDataTable(TimelineData() %>% select(Name, TeamMembers, Customer, StartDate, Deadline, ProjectBrief, QALog), selection="single")
 
-
 output$TimelineTeamSelector <- renderUI({ 
   confirmingButtons()
-  Teams = sort(unique((peopleData() %>% filter(CurrentlyInTeam))$Team))
+  Teams = sort(unique(unlist(strsplit((peopleData() %>% filter(CurrentlyInTeam))$Team,','))))
   checkboxGroupInput("team2", "Teams:", Teams, selected=Teams) 
 })
 
 output$TimelineTeamMemberSelector <- renderUI({ 
   confirmingButtons()
-  Names = append("All", as.character(sort(unique((peopleData() %>% filter(CurrentlyInTeam) %>% filter(Team %in% input$team2))$Name))))
+  Names = append("All", as.character(sort(unique((peopleData() %>% filter(CurrentlyInTeam) %>% filter(grepl(paste(input$team2, collapse='|'), Team)))$Name))))
   selectInput("name2", "Name:", Names, Names[1]) 
 })
 

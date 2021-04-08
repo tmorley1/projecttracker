@@ -15,7 +15,7 @@ output$completedSelector <- renderUI({
 })
 
 # Prints the list of team members in the teams selected 
-output$peopleInTeam <- renderText({ paste((peopleData() %>% filter(grepl(paste(input$team, collapse='|'), Team)))$Name, collapse= ', ')})
+output$peopleInTeam <- renderText({ paste((peopleData() %>% filter(grepl(paste(input$team, collapse='|'), Team))%>%filter(CurrentlyInTeam))$Name, collapse= ', ')})
 
 
 
