@@ -109,7 +109,8 @@ observeEvent(input$addPerson, {
     conditionalPanel(
       condition = "( (output.newNameExists != 'TRUE') | (output.newNameHasBeenRemoved == 'TRUE' & output.newNameExists == 'TRUE')) & output.newTeamNameBlank != 'TRUE' ",
       actionButton("ConfirmNewPerson", "Confirm")
-    )
+    ),
+    h5("If you are a member of multiple teams, please separate each team name with a ',' and no spaces")
     
   ))
 })
