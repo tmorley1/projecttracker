@@ -1,9 +1,9 @@
 # Gray banner -------------------------------------------------------------
 
 # Creates the checkboax in the gray banner t select teams which you want to see
-output$teamsSelector <- renderUI({ 
+output$teamsSelector <- renderUI({
   confirmingButtons()
-  Teams = sort(unique((peopleData() %>% filter(CurrentlyInTeam))$Team))
+  Teams = sort(unique(unlist(strsplit((peopleData() %>% filter(CurrentlyInTeam))$Team,','))))
   checkboxGroupInput("team", "Teams:", Teams, selected=Teams) 
 })
 
@@ -15,7 +15,8 @@ output$completedSelector <- renderUI({
 })
 
 # Prints the list of team members in the teams selected 
-output$peopleInTeam <- renderText({ paste((peopleData() %>% filter(Team %in% input$team))$Name, collapse= ', ')})
+output$peopleInTeam <- renderText({ paste((peopleData() %>% filter(grepl(paste(input$team, collapse='|'), Team)))$Name, collapse= ', ')})
+
 
 
 # Manipulating data files into useful dataframes for this page ------------

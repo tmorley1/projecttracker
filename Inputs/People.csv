@@ -1,14 +1,14 @@
-"Name","Team","CurrentlyInTeam"
-"Chris Bromley","MIAU","TRUE"
-"Thomas Clements","MIAU/SFA","TRUE"
-"Nick Adamson","MIAU","TRUE"
-"Thomas Morley","MIAU","TRUE"
-"James McGlade","MIAU","TRUE"
-"Nicky Brassington","MIAU","TRUE"
-"Daryl Gowlett","MIAU","TRUE"
-"Peter Heath","","FALSE"
-"Elizabeth","MIAU","FALSE"
-"Jonathan Needham","MIAU","FALSE"
-"Leanne Sunter","MIAU","FALSE"
-"Maddy Hay","MIAU","FALSE"
-"Lizzie Greenwood","MIAU","FALSE"
+Name,Team,CurrentlyInTeam
+Chris Bromley,MIAU,TRUE
+Thomas Clements,"MIAU,SFA",TRUE
+Nick Adamson,MIAU,TRUE
+Thomas Morley,MIAU,TRUE
+James McGlade,MIAU,TRUE
+Nicky Brassington,MIAU,TRUE
+Daryl Gowlett,MIAU,TRUE
+Peter Heath,,FALSE
+Elizabeth,MIAU,FALSE
+Jonathan Needham,MIAU,FALSE
+Leanne Sunter,MIAU,FALSE
+Maddy Hay,MIAU,FALSE
+Lizzie Greenwood,MIAU,FALSE
