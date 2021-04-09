@@ -86,7 +86,7 @@ personData <- reactive ({
   }
 })
 
-output$personProject <- DT::renderDataTable(personData() %>% filter(Completed == ifelse(input$completed2 == "Completed Projects", TRUE, FALSE)) %>% select(-Comments, -Documentation, -TeamMember, -Completed), server=FALSE)
+output$personProject <- DT::renderDataTable(personData() %>% filter(Completed == ifelse(input$completed2 == "Completed Projects", TRUE, FALSE)) %>% select(-Comments, -Documentation, -TeamMember, -Completed), server=FALSE, selection='single')
 
 
 
