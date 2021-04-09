@@ -16,7 +16,7 @@ output$ganntChart <- renderPlot(
     theme_bw()+ #use ggplot theme with black gridlines and white background
     # geom_segment(size=15) + #increase line width of segments in the chart
     labs(x='Timescale', y='Project', color="Deadline State")
-  
+   
 )
 
 output$TimeLineTable <- DT::renderDataTable(TimelineData() %>% select(Name, TeamMembers, Customer, StartDate, Deadline, ProjectBrief, QALog), selection="single")
