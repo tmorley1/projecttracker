@@ -3,7 +3,7 @@
 # Rendering the 2 tables and re-establishing the functions
 output$people <- DT::renderDataTable(peopleData() %>% filter(CurrentlyInTeam == "TRUE") %>% select(-CurrentlyInTeam), 
                                      server = FALSE, selection='single',
-                                     extensions = 'Buttons', options = list(dom = 'Bfrtip', buttons = I('colvis')))
+                                     extensions = c('Responsive'))
 
 
 output$project<- DT::renderDataTable({
@@ -112,6 +112,8 @@ observeEvent(input$addPerson, {
     textInput("addPersonForm2", "Team:"),
     h5("If you are a member of multiple teams, please separate each team name with a ',' and no spaces"),
     textInput("addPersonForm3", "Email:"),
+    textInput("addPersonForm4", "Location:"),
+    textInput("addPersonForm4", "Grade"),
     conditionalPanel(
       condition = "( (output.newNameExists != 'TRUE') | (output.newNameHasBeenRemoved == 'TRUE' & output.newNameExists == 'TRUE')) & output.newTeamNameBlank != 'TRUE' ",
       actionButton("ConfirmNewPerson", "Confirm")
@@ -124,14 +126,24 @@ observeEvent(input$addPerson, {
 observeEvent(input$ConfirmNewPerson, {
   if(!newNameExists()) {
     peopleData <- peopleData() %>%
-      rbind(data.frame(Name = c(input$addPersonForm), Team=c(input$addPersonForm2), CurrentlyInTeam=c("TRUE"), Email=c(input$addPersonForm3)))
+      rbind(data.frame(Name = c(input$addPersonForm), 
+                       Team=c(input$addPersonForm2), 
+                       CurrentlyInTeam=c("TRUE"), 
+                       Email=c(input$addPersonForm3), 
+                       Location=c(input$addPersonForm4), 
+                       Grade=c(input$addPersonForm5)))
     #saves changes to csv file and re-renders table
   }
   else { 
     # if reinstating a team member deleting the original row and adding a new row where they are currently in the team
     peopleData <- peopleData() %>% 
       filter(tolower(Name)!=tolower(input$addPersonForm)) %>%
-      rbind(data.frame(Name = c(input$addPersonForm), Team=c(input$addPersonForm2), CurrentlyInTeam=c("TRUE"), Email=c(input$addPersonForm3)))
+      rbind(data.frame(Name = c(input$addPersonForm), 
+                       Team=c(input$addPersonForm2), 
+                       CurrentlyInTeam=c("TRUE"), 
+                       Email=c(input$addPersonForm3),
+                       Location=c(input$addPersonForm4),
+                       Grade=c(inputer$addPersonForm5)))
   }
   #reads data from csv file (peopleData() function), then attatches new person to table
   saveChangesToPeopleFile(peopleData)
@@ -181,6 +193,8 @@ observeEvent(input$editPerson, {
     ),
     textInput("editPersonForm2", "Team:", value = peopleData[input$people_rows_selected,2]),
     textInput("editPersonForm3", "Email:", value = peopleData[input$people_rows_selected,4]),
+    textInput("editPersonForm4", "Location:", value=peopleData[input$people_rows_selected,5]),
+    textInput("editPersonForm5", "Grade:", value=peopleData[input$people_rows_selected,6]),
     #error message
     conditionalPanel(
       condition = "output.editedNameExists != 'TRUE' & output.editedTeamNameBlank != 'TRUE'", #  & output.editedNameHasBeenRemoved != 'TRUE'", - this isn't needed?????
@@ -198,6 +212,8 @@ observeEvent(input$ConfirmPerson, {
   newPeopleData[input$people_rows_selected, 2] <- as.character(input$editPersonForm2)
   newPeopleData[input$people_rows_selected, 3] <- "TRUE"
   newPeopleData[input$people_rows_selected, 4] <- as.character(input$editPersonForm3)
+  newPeopleData[input$people_rows_selected, 5] <- as.character(input$editPersonForm4)
+  newPeopleData[input$people_rows_selected, 6] <- as.character(input$editPersonForm5)
   
   newPeopleData <- newPeopleData %>% rbind(peopleData() %>% filter(!CurrentlyInTeam))
   projectData <- projectData() %>%
