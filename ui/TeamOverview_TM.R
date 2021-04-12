@@ -154,9 +154,9 @@ tabPanel("Team Overview",
                                      )
                                      )
                               ),
-                            fluidRow(
+                            fluidRow(conditionalPanel("output.completedNumberjustnumber == 'FALSE'",
                               column(6,
-                                     plotlyOutput("customerTreeMap")
+                                     plotlyOutput("customerTreeMap"))
                               )
                             ),
                             fluidRow(

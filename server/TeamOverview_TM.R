@@ -316,6 +316,17 @@ observeEvent(input$projectDetailsGreen, {
 
 ## KPIs 
 output$completedNumberOfProjects <- renderValueBox(valueBox(nrow(specificTeamData()), subtitle="Projects' selected", color="aqua"))
+
+output$completedNumberjustnumber <- renderText({
+  if(nrow(specificTeamData())==0){
+    "TRUE"
+    } 
+  else {
+    "FALSE"
+    }
+  })
+outputOptions(output, "completedNumberjustnumber", suspendWhenHidden=FALSE)
+
 output$completedQALogKPI <- renderValueBox(valueBox(paste(round((nrow(specificTeamData()%>% filter(QALog == TRUE))/nrow(specificTeamData() ))*100, digits=0), "%"), subtitle="Projects with QA logs (100%)"))
 output$completedQALogKPI2 <- renderValueBox(valueBox(paste(round((nrow(specificTeamData()%>% filter(QALog == TRUE))/nrow(specificTeamData() ))*100, digits=0), "%"), subtitle="Projects with QA logs (100%)"))
 output$completedProjectBriefKPI <- renderValueBox(valueBox(paste(round((nrow(specificTeamData()%>% filter(ProjectBrief == TRUE))/nrow(specificTeamData() ))*100, digits=0), "%"), subtitle="Projects with a project brief (90%)"))
