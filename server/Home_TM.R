@@ -5,15 +5,14 @@ output$people <- DT::renderDataTable(peopleData() %>% filter(CurrentlyInTeam == 
                                      server = FALSE, selection='single',
                                      extensions = c('Responsive'))
 
-
-output$project<- DT::renderDataTable({
+output$project<- DT::renderDataTable(
   dat1 <-datatable(projectData()%>%
                      select(-Comments, -Documentation)%>%
                      mutate(in_team = ifelse(TeamMembers %in% list_current(), T, F))%>%
                      mutate(incomplete = ifelse(Completed == F & in_team == F, T, F))%>%
-                     select(-in_team), options=list(columnDefs = list(list(visible=FALSE, targets=c(12)))))%>%
-    formatStyle('incomplete', target='row', backgroundColor=styleEqual(c(T,F), c('red', '')))
-}, server = FALSE, selection='single')
+                     select(-in_team), options=list(columnDefs = list(list(visible=FALSE, targets=c(12)))),
+ selection='single')%>%
+  formatStyle('incomplete', target='row', backgroundColor=styleEqual(c(T,F), c('red', ''))))
 
 peopleData <- function() {
   peopleData <- as.data.frame(read.csv(paste(dataPathway, "People.csv", sep="")))
