@@ -119,8 +119,6 @@ projectDetails <- function(dataSource, inputRow) {
 
 # App ---------------------------------------------------------------------
 
-C:\Users\tmorley\OneDrive - Department for Education\Documents - Strategic Operations Analysis Division\General\Project Tracker_TM
-
 ui <- navbarPage("Project Management",
                  theme = shinytheme("united"),
                  source(paste("C:\\Users\\", username, "\\OneDrive - Department for Education\\Documents - Strategic Operations Analysis Division\\General\\Project Tracker_TM\\projecttracker\\ui\\TeamOverview_TM.R", sep=""), local=TRUE)$value,
@@ -132,7 +130,7 @@ ui <- navbarPage("Project Management",
 
 server <- function(input, output, session) {
   source(paste("C:\\Users\\", username, "\\OneDrive - Department for Education\\Documents - Strategic Operations Analysis Division\\General\\Project Tracker_TM\\projecttracker\\server\\Home_TM.R", sep=""), local=TRUE)$value
-  source(paste("C:\\Users\\", username, "\\OneDrive - Department for Education\\Documents - Strategic Operations Analysis Division\\General\\Project Tracker_TM\\projecttracker\\TeamOverview_TM.R", sep=""), local=TRUE)$value
+  source(paste("C:\\Users\\", username, "\\OneDrive - Department for Education\\Documents - Strategic Operations Analysis Division\\General\\Project Tracker_TM\\projecttracker\\server\\TeamOverview_TM.R", sep=""), local=TRUE)$value
   source(paste("C:\\Users\\", username, "\\OneDrive - Department for Education\\Documents - Strategic Operations Analysis Division\\General\\Project Tracker_TM\\projecttracker\\server\\PersonOverview_TM.R", sep=""), local=TRUE)$value
   source(paste("C:\\Users\\", username, "\\OneDrive - Department for Education\\Documents - Strategic Operations Analysis Division\\General\\Project Tracker_TM\\projecttracker\\server\\Timeline_TM.R", sep=""), local=TRUE)$value
   

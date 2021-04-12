@@ -27,7 +27,7 @@ TeamData <- reactive({
   left_join(
     left_join(
       tidyr::separate_rows(projectData(), TeamMembers, sep=" ,|, |,"),
-      peopleData(),
+      peopleData()%>%filter(CurrentlyInTeam),
       by=c("TeamMembers"="Name")) %>%
       filter(!is.na(Team)) %>%
       group_by(Name) %>%
@@ -121,7 +121,7 @@ output$noProjectPerPerson <- renderPlotly({
       filter(CurrentlyInTeam)%>%
       summarise(NoProjects = n()) %>%
       right_join(peopleData()%>%filter(CurrentlyInTeam), by=c("TeamMembers" = "Name")) %>%
-      filter(Team %in% input$team) %>%
+      filter(grepl(paste(input$team, collapse='|'), Team)) %>%
       ggplot(aes(x=TeamMembers, y=NoProjects)) +
       geom_bar(stat= "identity", fill='#EA5421' )+
       labs(title="Number of projects by team member") +
