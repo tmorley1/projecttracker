@@ -1,6 +1,6 @@
 # Gray banner -------------------------------------------------------------
 
-# Creates the checkboax in the gray banner t select teams which you want to see
+# Creates the checkbox in the gray banner t select teams which you want to see
 output$teamsSelector <- renderUI({
   confirmingButtons()
   Teams = sort(unique(unlist(strsplit((peopleData() %>% filter(CurrentlyInTeam))$Team,','))))
@@ -55,7 +55,6 @@ specificTeamData <- reactive({
     mutate(DateCompleted = as.Date(DateCompleted, "%d/%m/%Y")) %>%
     filter(Completed == ifelse(input$completed=="Live Projects", FALSE, TRUE)) %>%
     distinct(Name, .keep_all = TRUE)
-  
   
   if(input$completed=="Completed Projects"){
     specificTeamData <- data %>% filter(DateCompleted > date)
@@ -119,8 +118,9 @@ output$noProjectPerPerson <- renderPlotly({
       peopleData(),
       by=c("TeamMembers"="Name")) %>%
       group_by(TeamMembers) %>%
+      filter(CurrentlyInTeam)%>%
       summarise(NoProjects = n()) %>%
-      right_join(peopleData(), by=c("TeamMembers" = "Name")) %>%
+      right_join(peopleData()%>%filter(CurrentlyInTeam), by=c("TeamMembers" = "Name")) %>%
       filter(Team %in% input$team) %>%
       ggplot(aes(x=TeamMembers, y=NoProjects)) +
       geom_bar(stat= "identity", fill='#EA5421' )+
