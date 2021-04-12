@@ -6,10 +6,21 @@
 
 
 # Allows a user to select a team member to look at their live and completed projects
+output$currentSelector <- renderUI({
+  confirmingButtons()
+  selectInput("current", "Current or Past Members", c("Current members", "Past members"), selected = "Current members")
+})
+
 output$teamMemberSelector <- renderUI({ 
   confirmingButtons()
   Names = sort(unique((peopleData() %>% filter(CurrentlyInTeam))$Name))
   selectInput("name", "Name:", Names, Names[1]) 
+})
+
+output$pastteamMemberSelector <- renderUI({ 
+  confirmingButtons()
+  pastNames = sort(unique((peopleData() %>% filter(!CurrentlyInTeam))$Name))
+  selectInput("pastname", "Past Name:", pastNames, pastNames[1]) 
 })
 
 # Allows a user to select whether to see the chosen team member's live or completed projects
@@ -27,7 +38,7 @@ output$TeamMembersCompletedProjects <- renderValueBox(valueBox(
       projectData() %>%
         select(Name, TeamMembers)
     ) %>%
-      filter(TeamMember == input$name) %>%
+      filter(TeamMember == ifelse(input$current == "Current members", input$name, input$pastname)) %>%
       filter(Completed=="TRUE")),
   subtitle="Completed Projects"))
 
@@ -40,7 +51,7 @@ output$TeamMembersLiveProjects <- renderValueBox(valueBox(
       projectData() %>%
         select(Name, TeamMembers)
     ) %>%
-      filter(TeamMember == input$name) %>%
+      filter(TeamMember == ifelse(input$current == "Current members", input$name, input$pastname)) %>%
       filter(Completed=="FALSE")),
   subtitle="Live Projects"))
 
@@ -54,7 +65,6 @@ output$completedInThePersonOverview <- renderText({
   ifelse(input$completed2 == "Completed Projects", "TRUE", "FALSE")
 })
 outputOptions(output, "completedInThePersonOverview", suspendWhenHidden=FALSE)
-
 
 # Creating data to be shown in data table
 personData <- reactive ({
@@ -76,7 +86,7 @@ personData <- reactive ({
           rename(TeamMember = TeamMembers),
         projectData() %>%
           select(Name, TeamMembers)) %>%
-      filter(TeamMember == input$name) %>%
+      filter(TeamMember == ifelse(input$current == "Current members", input$name, input$pastname)) %>%
       mutate(DateCompleted = as.Date(DateCompleted, "%d/%m/%Y"))
   
   if(input$completed2 == "Completed Projects"){
