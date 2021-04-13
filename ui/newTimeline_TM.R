@@ -31,6 +31,8 @@ tabPanel("New Timeline",
          fluidRow(
            column(12,
                   DT::dataTableOutput("newTimeLineTable"),
+                  conditionalPanel(condition = "input.newTimeLineTable_rows_selected !=  0",
+                                   actionButton("newprojectDetailsTimeline", "Details of Project"))
            )
          ),
 )

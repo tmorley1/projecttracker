@@ -41,9 +41,9 @@ newTimelineData <- reactive({
                                  )
          ))%>%
   select(Name,TeamMembers, Customer, StartDate, Deadline, DateCompleted, Completed)%>%
-  rename(activity = Name, start_date=StartDate, end_date=DateCompleted, spot_date=Deadline)%>%
+  rename(wp = Name, start_date=StartDate, end_date=DateCompleted, spot_date=Deadline)%>%
   drop_na("start_date")%>%
-  mutate(wp="", spot_type="D")%>%
+  mutate(activity=wp, spot_type="D")%>%
   mutate(end_date = ifelse(is.na(end_date),format(Sys.Date(), "%d/%m/%Y"),format(end_date, "%d/%m/%Y"))) %>%
   mutate(end_date = as.Date(end_date, "%d/%m/%Y"))
   }
@@ -66,9 +66,9 @@ newTimelineData <- reactive({
                                      )
              ))%>%
       select(Name,TeamMembers, Customer, StartDate, Deadline, DateCompleted, Completed)%>%
-      rename(activity = Name, start_date=StartDate, end_date=DateCompleted, spot_date=Deadline)%>%
+      rename(wp = Name, start_date=StartDate, end_date=DateCompleted, spot_date=Deadline)%>%
       drop_na("start_date")%>%
-      mutate(wp="", spot_type="D")%>%
+      mutate(activity=wp, spot_type="D")%>%
       mutate(end_date = ifelse(is.na(end_date),format(Sys.Date(), "%d/%m/%Y"),format(end_date, "%d/%m/%Y"))) %>%
       mutate(end_date = as.Date(end_date, "%d/%m/%Y"))
   }
@@ -77,7 +77,7 @@ newTimelineData <- reactive({
 
 ## Creating table
 
-output$newTimeLineTable <- DT::renderDataTable(newTimelineData(), selection="single")
+output$newTimeLineTable <- DT::renderDataTable(newTimelineData()%>%rename(Name = wp, StartDate = start_date, DateCompleted=end_date, Deadline = spot_date)%>%select(-activity,-spot_type), selection="single")
 
 ## Creating gantt chart
 
@@ -86,5 +86,17 @@ output$newganttChart <- renderPlot(
             spots = newTimelineData(),
             by_date = TRUE,
             exact_date = TRUE,
+            hide_wp = TRUE,
             month_number_label = FALSE,
             font_family = "Roboto Condensed"))
+
+
+# PROJECT DETAILS
+observeEvent(input$newprojectDetailsTimeline, {
+  projectDetails(
+    as.data.frame(
+      newTimelineData()
+    ),
+    input$newTimeLineTable_rows_selected
+  )
+})

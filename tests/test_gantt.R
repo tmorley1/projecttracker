@@ -31,10 +31,10 @@ newTimelineData <- left_join(
                                         ifelse(Deadline < Sys.Date(), "Passed Deadline","On Track")
                                  )
          ))%>%
-  select(Name,TeamMembers, Customer, StartDate, Deadline, DateCompleted)%>%
-  rename(activity = Name, start_date=StartDate, end_date=DateCompleted, spot_date=Deadline)%>%
+  select(Name,TeamMembers, Customer, StartDate, Deadline, DateCompleted, deadlinePassed)%>%
+  rename(wp = Name, start_date=StartDate, end_date=DateCompleted, spot_date=Deadline)%>%
   drop_na("start_date")%>%
-  mutate(wp="", spot_type="D")%>%
+  mutate(activity= wp, spot_type="D")%>%
   mutate(end_date = ifelse(is.na(end_date),format(Sys.Date(), "%d/%m/%Y"),format(end_date, "%d/%m/%Y"))) %>%
   mutate(end_date = as.Date(end_date, "%d/%m/%Y"))
 
@@ -44,7 +44,7 @@ ganttchart <- ganttrify(project = newTimelineData,
           by_date = TRUE,
           exact_date = TRUE,
           month_number_label = FALSE,
+          colour_palette = if(newTimelineData$deadlinePassed == "Deadline Not Met"){wesanderson::wes_palette("Darjeeling2")} else{wesanderson::wes_palette("Darjeeling1")},
           font_family = "Roboto Condensed")
-typeof(ganttchart)
 
 print (ganttchart)
