@@ -8,6 +8,7 @@ library(stringr)
 library(shinydashboard)
 library(treemap)
 library(lubridate)
+library(ganttrify)
 
 username <- "tmorley"#change to be your username
 dataPathway <- paste("C:\\Users\\", username, "\\OneDrive - Department for Education\\Documents - Strategic Operations Analysis Division\\General\\Project Tracker_TM\\projecttracker\\Inputs\\", sep="")
@@ -125,6 +126,7 @@ ui <- navbarPage("Project Management",
                  source(paste("C:\\Users\\", username, "\\OneDrive - Department for Education\\Documents - Strategic Operations Analysis Division\\General\\Project Tracker_TM\\projecttracker\\ui\\PersonOverview_TM.R", sep=""), local=TRUE)$value,
                  source(paste("C:\\Users\\", username, "\\OneDrive - Department for Education\\Documents - Strategic Operations Analysis Division\\General\\Project Tracker_TM\\projecttracker\\ui\\Timeline_TM.R", sep=""), local=TRUE)$value,
                  source(paste("C:\\Users\\", username, "\\OneDrive - Department for Education\\Documents - Strategic Operations Analysis Division\\General\\Project Tracker_TM\\projecttracker\\ui\\Home_TM.R", sep=""), local=TRUE)$value,            
+                 source(paste("C:\\Users\\", username, "\\OneDrive - Department for Education\\Documents - Strategic Operations Analysis Division\\General\\Project Tracker_TM\\projecttracker\\ui\\newTimeline_TM.R", sep=""), local=TRUE)$value,
                  tags$head(tags$style("h5{color: red;}")) # making error messages red
 )
 
@@ -133,7 +135,7 @@ server <- function(input, output, session) {
   source(paste("C:\\Users\\", username, "\\OneDrive - Department for Education\\Documents - Strategic Operations Analysis Division\\General\\Project Tracker_TM\\projecttracker\\server\\TeamOverview_TM.R", sep=""), local=TRUE)$value
   source(paste("C:\\Users\\", username, "\\OneDrive - Department for Education\\Documents - Strategic Operations Analysis Division\\General\\Project Tracker_TM\\projecttracker\\server\\PersonOverview_TM.R", sep=""), local=TRUE)$value
   source(paste("C:\\Users\\", username, "\\OneDrive - Department for Education\\Documents - Strategic Operations Analysis Division\\General\\Project Tracker_TM\\projecttracker\\server\\Timeline_TM.R", sep=""), local=TRUE)$value
-  
+  source(paste("C:\\Users\\", username, "\\OneDrive - Department for Education\\Documents - Strategic Operations Analysis Division\\General\\Project Tracker_TM\\projecttracker\\server\\newTimeline_TM.R", sep=""), local=TRUE)$value  
 }
 
 shinyApp(ui,server)
