@@ -1,11 +1,12 @@
 ## TIMELINE SERVER PAGE OF PROJECT TRACKER
 ## SPECIFICALLY LOOKING AT THE DATES OF PROJECTS
 
-newTimelineData <- left_join(
+newTimelineData <- reactive({
+  left_join(
   tidyr::separate_rows(projectData(), TeamMembers, sep=" ,|, |,") %>%
     rename(TeamMember = TeamMembers),
   projectData() %>%
-    select(Name, TeamMembers)) %>%
+  select(Name, TeamMembers)) %>%
   left_join(peopleData(), by=c("TeamMember"="Name")) %>%
   filter(!duplicated(Name))%>%
   mutate(Deadline = as.Date(Deadline, "%d/%m/%Y"),
@@ -18,16 +19,17 @@ newTimelineData <- left_join(
          ))%>%
   select(Name,TeamMembers, Customer, StartDate, Deadline, DateCompleted)%>%
   rename(activity = Name, start_date=StartDate, end_date=DateCompleted, spot_date=Deadline)%>%
-  drop_na("start_date", "end_date")%>%
-  mutate(wp="", spot_type="D")
+  drop_na("start_date")%>%
+  mutate(wp="", spot_type="D")%>%
+  mutate(end_date = ifelse(is.na(end_date),format(Sys.Date(), "%d/%m/%Y"),format(end_date, "%d/%m/%Y"))) %>%
+  mutate(end_date = as.Date(end_date, "%d/%m/%Y"))
+})
 
-spots_table <- newTimelineData%>% select(activity, spot_type, spot_date)
-
-output$newTimeLineTable <- DT::renderDataTable(newTimelineData, selection="single")
+output$newTimeLineTable <- DT::renderDataTable(newTimelineData(), selection="single")
 
 output$newganttChart <- renderPlot(
-  ganttrify(project = newTimelineData,
-            spots = newTimelineData,
+  ganttrify(project = newTimelineData(),
+            spots = newTimelineData(),
             by_date = TRUE,
             exact_date = TRUE,
             month_number_label = FALSE,

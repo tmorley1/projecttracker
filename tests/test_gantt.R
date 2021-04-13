@@ -15,6 +15,7 @@ dataPathway <- paste("C:\\Users\\", username, "\\OneDrive - Department for Educa
 projectData <- projectData <- as.data.frame(read.csv(paste(dataPathway, "Projects.csv", sep="")))
 peopleData <- peopleData <- as.data.frame(read.csv(paste(dataPathway, "People.csv", sep="")))
 
+
 newTimelineData <- left_join(
   tidyr::separate_rows(projectData, TeamMembers, sep=" ,|, |,") %>%
     rename(TeamMember = TeamMembers),
@@ -32,10 +33,11 @@ newTimelineData <- left_join(
          ))%>%
   select(Name,TeamMembers, Customer, StartDate, Deadline, DateCompleted)%>%
   rename(activity = Name, start_date=StartDate, end_date=DateCompleted, spot_date=Deadline)%>%
-  drop_na("start_date", "end_date")%>%
-  mutate(wp="", spot_type="D")
+  drop_na("start_date")%>%
+  mutate(wp="", spot_type="D")%>%
+  mutate(end_date = ifelse(is.na(end_date),format(Sys.Date(), "%d/%m/%Y"),format(end_date, "%d/%m/%Y"))) %>%
+  mutate(end_date = as.Date(end_date, "%d/%m/%Y"))
 
-spots_table <- newTimelineData%>% select(activity, spot_type, spot_date)
 
 ganttchart <- ganttrify(project = newTimelineData,
           spots = newTimelineData,
