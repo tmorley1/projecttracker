@@ -8,7 +8,6 @@ library(stringr)
 library(shinydashboard)
 library(treemap)
 library(lubridate)
-library(ganttrify)
 
 username <- "tmorley"#change to be your username
 dataPathway <- paste("C:\\Users\\", username, "\\OneDrive - Department for Education\\Documents - Strategic Operations Analysis Division\\General\\Project Tracker_TM\\projecttracker\\Inputs\\", sep="")

@@ -81,8 +81,10 @@ output$newTimeLineTable <- DT::renderDataTable(newTimelineData()%>%rename(Name =
 
 ## Creating gantt chart
 
+source("C:\\Users\\tmorley\\OneDrive - Department for Education\\Documents - Strategic Operations Analysis Division\\General\\Project Tracker_TM\\projecttracker\\tests\\ganttrifyy.R")
+
 output$newganttChart <- renderPlot(
-  ganttrify(project = newTimelineData(),
+  ganttrifyy(project = newTimelineData(),
             spots = newTimelineData(),
             by_date = TRUE,
             exact_date = TRUE,
