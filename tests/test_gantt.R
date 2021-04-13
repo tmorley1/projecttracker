@@ -44,7 +44,7 @@ ganttchart <- ganttrify(project = newTimelineData,
           by_date = TRUE,
           exact_date = TRUE,
           month_number_label = FALSE,
-          colour_palette = if(newTimelineData$deadlinePassed == "Deadline Not Met"){wesanderson::wes_palette("Darjeeling2")} else{wesanderson::wes_palette("Darjeeling1")},
+          colour_palette = red,
           font_family = "Roboto Condensed")
 
 print (ganttchart)

@@ -23,10 +23,10 @@ tabPanel("New Timeline",
          ),
          
          fluidRow(
-           column(12,
+           conditionalPanel("output.projectsNumberjustnumber == 'FALSE'",(column(12,
                   plotOutput("newganttChart")
-         )
-         ),
+         ))
+         )),
          
          fluidRow(
            column(12,
@@ -34,6 +34,6 @@ tabPanel("New Timeline",
                   conditionalPanel(condition = "input.newTimeLineTable_rows_selected !=  0",
                                    actionButton("newprojectDetailsTimeline", "Details of Project"))
            )
-         ),
+         )
 )
          

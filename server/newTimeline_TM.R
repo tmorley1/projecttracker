@@ -72,7 +72,7 @@ newTimelineData <- reactive({
       mutate(end_date = ifelse(is.na(end_date),format(Sys.Date(), "%d/%m/%Y"),format(end_date, "%d/%m/%Y"))) %>%
       mutate(end_date = as.Date(end_date, "%d/%m/%Y"))
   }
-  TimelineData <- data
+  newTimelineData <- data
 })
 
 ## Creating table
@@ -91,7 +91,7 @@ output$newganttChart <- renderPlot(
             font_family = "Roboto Condensed"))
 
 
-# PROJECT DETAILS
+## PROJECT DETAILS
 observeEvent(input$newprojectDetailsTimeline, {
   projectDetails(
     as.data.frame(
@@ -100,3 +100,14 @@ observeEvent(input$newprojectDetailsTimeline, {
     input$newTimeLineTable_rows_selected
   )
 })
+
+## Testing whether there are any entries in the projects table
+output$projectsNumberjustnumber <- renderText({
+  if(nrow(newTimelineData())==0){
+    "TRUE"
+  } 
+  else {
+    "FALSE"
+  }
+})
+outputOptions(output, "projectsNumberjustnumber", suspendWhenHidden=FALSE)
