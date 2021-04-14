@@ -23,17 +23,29 @@ tabPanel("New Timeline",
          ),
          
          fluidRow(
-           conditionalPanel("output.projectsNumberjustnumber == 'FALSE'",(column(12,
-                  plotOutput("newganttChart")
+           conditionalPanel("output.projectsNumberjustnumber == 'FALSE'",
+                            (column(12,plotOutput("newganttChart")
          ))
          )),
          
          fluidRow(
-           column(12,
-                  DT::dataTableOutput("newTimeLineTable"),
-                  conditionalPanel(condition = "input.newTimeLineTable_rows_selected !=  0",
-                                   actionButton("newprojectDetailsTimeline", "Details of Project"))
+           conditionalPanel("input.newcompleted3 == 'Live Projects'",
+             column(12,
+                  DT::dataTableOutput("newTimeLineTablelive"),
+                  conditionalPanel(condition = "input.newTimeLineTablelive_rows_selected !=  0",
+                                   actionButton("newprojectDetailsTimelinelive", "Details of Project"))
            )
          )
+),
+
+          fluidRow(
+              conditionalPanel("input.newcompleted3 != 'Live Projects'",
+                   column(12,
+                          DT::dataTableOutput("newTimeLineTablecompleted"),
+                          conditionalPanel(condition = "input.newTimeLineTablecompleted_rows_selected !=  0",
+                                           actionButton("newprojectDetailsTimelinecompleted", "Details of Project"))
+                   )
+  )
+),
 )
          

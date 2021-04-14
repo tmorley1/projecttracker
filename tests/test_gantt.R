@@ -32,19 +32,26 @@ newTimelineData <- left_join(
                                  )
          ))%>%
   select(Name,TeamMembers, Customer, StartDate, Deadline, DateCompleted, deadlinePassed)%>%
-  rename(wp = Name, start_date=StartDate, end_date=DateCompleted, spot_date=Deadline)%>%
+  rename(activity = Name, wp=deadlinePassed, start_date=StartDate, end_date=DateCompleted, spot_date=Deadline)%>%
   drop_na("start_date")%>%
-  mutate(activity= wp, spot_type="D")%>%
+  mutate(spot_date = ifelse(Sys.Date()<spot_date, "", format(spot_date, "%d/%m/%Y")))%>%
+  mutate(spot_date = as.Date(spot_date, "%d/%m/%Y"))%>%
+  mutate(spot_type="D")%>%
   mutate(end_date = ifelse(is.na(end_date),format(Sys.Date(), "%d/%m/%Y"),format(end_date, "%d/%m/%Y"))) %>%
   mutate(end_date = as.Date(end_date, "%d/%m/%Y"))
 
+source("C:\\Users\\tmorley\\OneDrive - Department for Education\\Documents - Strategic Operations Analysis Division\\General\\Project Tracker_TM\\projecttracker\\tests\\ganttrifyy.R")
 
-ganttchart <- ganttrify(project = newTimelineData,
+
+cols <- c("Deadline Not Met" = "red", "Deadline Met" = "green", "Passed Deadline" = "red", "On Track" = "orange")
+
+ganttchart <- ganttrifyy(project = newTimelineData,
           spots = newTimelineData,
           by_date = TRUE,
           exact_date = TRUE,
           month_number_label = FALSE,
-          colour_palette = red,
+          colour_palette = cols,
+          hide_wp = TRUE,
           font_family = "Roboto Condensed")
 
 print (ganttchart)

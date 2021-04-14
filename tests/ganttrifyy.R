@@ -227,7 +227,8 @@ ganttrifyy <- function(project,
                                                                                          size = ggplot2::rel(size_text_relative),
                                                                                          hjust = axis_text_align_n),
                                                 axis.text.x = ggplot2::element_text(size = ggplot2::rel(size_text_relative)),
-                                                legend.position = "none"))
+                                                legend.position = "right",
+                                                legend.title = element_blank()))
   
   if (is.null(spots)==FALSE) {
     if (is.data.frame(spots)==TRUE) {

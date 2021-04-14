@@ -17,7 +17,7 @@ output$newTimelineTeamMemberSelector <- renderUI({
 
 output$newTimelineCompletedProjects <- renderUI({ 
   confirmingButtons()
-  selectInput("newcompleted3", "Completed Projects or Live Projects", c("Completed Projects", "Live Projects"), selected = "Live Projects") 
+  selectInput("newcompleted3", "Completed Projects or Live Projects", c("Live Projects","Completed Projects"), selected = "Live Projects") 
 })
 
 ## Reading in data
@@ -40,10 +40,12 @@ newTimelineData <- reactive({
                                         ifelse(Deadline < Sys.Date(), "Passed Deadline","On Track")
                                  )
          ))%>%
-  select(Name,TeamMembers, Customer, StartDate, Deadline, DateCompleted, Completed)%>%
-  rename(wp = Name, start_date=StartDate, end_date=DateCompleted, spot_date=Deadline)%>%
+  select(Name,TeamMembers, Customer, StartDate, Deadline, DateCompleted, deadlinePassed, Completed, ProjectBrief, QALog)%>%
+  rename(activity = Name, wp=deadlinePassed, start_date=StartDate, end_date=DateCompleted, spot_date=Deadline)%>%
   drop_na("start_date")%>%
-  mutate(activity=wp, spot_type="D")%>%
+  mutate(spot_date = ifelse(Sys.Date()<spot_date, "", format(spot_date, "%d/%m/%Y")))%>%
+  mutate(spot_date = as.Date(spot_date, "%d/%m/%Y"))%>%
+  mutate(spot_type="D")%>%
   mutate(end_date = ifelse(is.na(end_date),format(Sys.Date(), "%d/%m/%Y"),format(end_date, "%d/%m/%Y"))) %>%
   mutate(end_date = as.Date(end_date, "%d/%m/%Y"))
   }
@@ -65,10 +67,12 @@ newTimelineData <- reactive({
                                             ifelse(Deadline < Sys.Date(), "Passed Deadline","On Track")
                                      )
              ))%>%
-      select(Name,TeamMembers, Customer, StartDate, Deadline, DateCompleted, Completed)%>%
-      rename(wp = Name, start_date=StartDate, end_date=DateCompleted, spot_date=Deadline)%>%
+      select(Name,TeamMembers, Customer, StartDate, Deadline, deadlinePassed, DateCompleted, Completed, ProjectBrief, QALog)%>%
+      rename(activity=Name, wp=deadlinePassed, start_date=StartDate, end_date=DateCompleted, spot_date=Deadline)%>%
       drop_na("start_date")%>%
-      mutate(activity=wp, spot_type="D")%>%
+      mutate(spot_date = ifelse(Sys.Date()<spot_date, "", format(spot_date, "%d/%m/%Y")))%>%
+      mutate(spot_date = as.Date(spot_date, "%d/%m/%Y"))%>%
+      mutate(spot_type="D")%>%
       mutate(end_date = ifelse(is.na(end_date),format(Sys.Date(), "%d/%m/%Y"),format(end_date, "%d/%m/%Y"))) %>%
       mutate(end_date = as.Date(end_date, "%d/%m/%Y"))
   }
@@ -77,11 +81,14 @@ newTimelineData <- reactive({
 
 ## Creating table
 
-output$newTimeLineTable <- DT::renderDataTable(newTimelineData()%>%rename(Name = wp, StartDate = start_date, DateCompleted=end_date, Deadline = spot_date)%>%select(-activity,-spot_type), selection="single")
+output$newTimeLineTablelive <- DT::renderDataTable(newTimelineData()%>%rename(Name = activity, StartDate = start_date, DateCompleted=end_date, Deadline = spot_date)%>%select(-spot_type, -wp, -Completed, -DateCompleted), selection="single")
+output$newTimeLineTablecompleted <- DT::renderDataTable(newTimelineData()%>%rename(Name = activity, StartDate = start_date, DateCompleted=end_date, Deadline = spot_date)%>%select(-spot_type, -wp, -Completed), selection="single")
 
 ## Creating gantt chart
 
 source("C:\\Users\\tmorley\\OneDrive - Department for Education\\Documents - Strategic Operations Analysis Division\\General\\Project Tracker_TM\\projecttracker\\tests\\ganttrifyy.R")
+
+cols <- c("Deadline Not Met" = "red", "Deadline Met" = "green", "Passed Deadline" = "red", "On Track" = "orange")
 
 output$newganttChart <- renderPlot(
   ganttrifyy(project = newTimelineData(),
@@ -89,17 +96,27 @@ output$newganttChart <- renderPlot(
             by_date = TRUE,
             exact_date = TRUE,
             hide_wp = TRUE,
+            colour_palette = cols,
             month_number_label = FALSE,
             font_family = "Roboto Condensed"))
 
 
 ## PROJECT DETAILS
-observeEvent(input$newprojectDetailsTimeline, {
+observeEvent(input$newprojectDetailsTimelinelive, {
   projectDetails(
     as.data.frame(
       newTimelineData()
     ),
-    input$newTimeLineTable_rows_selected
+    input$newTimeLineTablelive_rows_selected
+  )
+})
+
+observeEvent(input$newprojectDetailsTimelinecompleted, {
+  projectDetails(
+    as.data.frame(
+      newTimelineData()
+    ),
+    input$newTimeLineTablecompleted_rows_selected
   )
 })
 
