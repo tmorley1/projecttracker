@@ -26,6 +26,23 @@ output$newTimelineCompletedProjects <- renderUI({
 ## Reading in data
 
 newTimelineData <- reactive({
+  confirmingButtons()
+  
+  date <- if(input$newcompleted3 == "Completed Projects") {
+    ifelse(input$newsinceCompletedTimeline == "Last Month",
+           Sys.Date()%m-% months(1),
+           ifelse(input$newsinceCompletedTimeline == "Last 6 Months",
+                  Sys.Date()%m-% months(6),
+                  ifelse(input$newsinceCompletedTimeline == "Last year",
+                         Sys.Date()%m-% months(12),
+                         ifelse(input$newsinceCompletedTimeline == "Last 3 years",
+                                Sys.Date()%m-% months(36),
+                                as.Date("01/01/2000", "%d/%m/%Y")
+                         ))))
+  } else{
+    as.Date("01/01/2000", "%d/%m/%Y")
+  }
+  
   data <- if(input$newname2 == "All"){left_join(                                #if all members are selected
   tidyr::separate_rows(projectData(), TeamMembers, sep=" ,|, |,") %>%           #reads in project data
     rename(TeamMember = TeamMembers),                                           
@@ -75,7 +92,14 @@ newTimelineData <- reactive({
       mutate(end_date = ifelse(is.na(end_date),format(Sys.Date(), "%d/%m/%Y"),format(end_date, "%d/%m/%Y"))) %>%
       mutate(end_date = as.Date(end_date, "%d/%m/%Y"))
   }
-  newTimelineData <- data
+  
+  if(input$newcompleted3 == "Completed Projects") {
+    newTimelineData <- data %>% filter(end_date > date)
+  } else{
+    newTimelineData <- data
+  }
+  
+  
 })
 
 ## Creating table

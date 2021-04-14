@@ -21,6 +21,15 @@ tabPanel("New Timeline",
                 )
            )
          ),
+         fluidRow(
+           column(12,
+                  conditionalPanel(
+                    "input.newcompleted3 == 'Completed Projects'",
+                    br(),
+                    selectInput("newsinceCompletedTimeline", "Completed projects in the: ", c("Last Month", "Last 6 Months", "Last year", "Last 3 years", "All")))
+                  ,
+           )
+         ),
          
          fluidRow(
            conditionalPanel("output.projectsNumberjustnumber == 'FALSE'",
