@@ -46,8 +46,6 @@ newTimelineData <- reactive({
   select(Name,TeamMembers, Customer, StartDate, Deadline, DateCompleted, deadlinePassed, Completed, ProjectBrief, QALog)%>% #selects only relevant columns
   rename(activity = Name, wp=deadlinePassed, start_date=StartDate, end_date=DateCompleted, spot_date=Deadline)%>% #renames columns for use in ganttrifyy function
   drop_na("start_date")%>%                                                      #removes projects with no start date
-  mutate(spot_date = ifelse(Sys.Date()<spot_date, "", format(spot_date, "%d/%m/%Y")))%>% #if deadline has not yet been reached, this is not displayed on the gantt chart
-  mutate(spot_date = as.Date(spot_date, "%d/%m/%Y"))%>%                         #reads in deadline as date
   mutate(spot_type="D")%>%                                                      #displays a D for deadline
   mutate(end_date = ifelse(is.na(end_date),format(Sys.Date(), "%d/%m/%Y"),format(end_date, "%d/%m/%Y"))) %>% #if project is still live, then the end date is given as today's date for purposes of gantt chart
   mutate(end_date = as.Date(end_date, "%d/%m/%Y"))                              #reads in end date as date
@@ -73,8 +71,6 @@ newTimelineData <- reactive({
       select(Name,TeamMembers, Customer, StartDate, Deadline, deadlinePassed, DateCompleted, Completed, ProjectBrief, QALog)%>%
       rename(activity=Name, wp=deadlinePassed, start_date=StartDate, end_date=DateCompleted, spot_date=Deadline)%>%
       drop_na("start_date")%>%
-      mutate(spot_date = ifelse(Sys.Date()<spot_date, "", format(spot_date, "%d/%m/%Y")))%>%
-      mutate(spot_date = as.Date(spot_date, "%d/%m/%Y"))%>%
       mutate(spot_type="D")%>%
       mutate(end_date = ifelse(is.na(end_date),format(Sys.Date(), "%d/%m/%Y"),format(end_date, "%d/%m/%Y"))) %>%
       mutate(end_date = as.Date(end_date, "%d/%m/%Y"))
@@ -91,18 +87,31 @@ output$newTimeLineTablecompleted <- DT::renderDataTable(newTimelineData()%>%rena
 
 source("C:\\Users\\tmorley\\OneDrive - Department for Education\\Documents - Strategic Operations Analysis Division\\General\\Project Tracker_TM\\projecttracker\\tests\\ganttrifyy.R")
 
-cols <- c("Deadline Not Met" = "red", "Deadline Met" = "green", "Passed Deadline" = "red", "On Track" = "orange")
+cols <- c("Deadline Not Met" = "red", "Deadline Met" = "green", "Passed Deadline" = "red", "On Track" = "green")
 
-output$newganttChart <- renderPlot(
+output$newganttChartlive <- renderPlot(
   ganttrifyy(project = newTimelineData(),
             spots = newTimelineData(),
+              #mutate(spot_date = ifelse(Sys.Date()<spot_date, "", format(spot_date, "%d/%m/%Y")))%>%
+             # mutate(spot_date = as.Date(spot_date, "%d/%m/%Y")),
             by_date = TRUE,
             exact_date = TRUE,
             hide_wp = TRUE,
             colour_palette = cols,
             month_number_label = FALSE,
-            font_family = "Roboto Condensed"))
+            font_family = "Roboto Condensed")+ geom_vline(aes(xintercept=Sys.Date()), size=2))
 
+output$newganttChartcompleted <- renderPlot( #no line for today when looking at completed projects
+  ganttrifyy(project = newTimelineData(),
+             spots = newTimelineData(),
+             #mutate(spot_date = ifelse(Sys.Date()<spot_date, "", format(spot_date, "%d/%m/%Y")))%>%
+             # mutate(spot_date = as.Date(spot_date, "%d/%m/%Y")),
+             by_date = TRUE,
+             exact_date = TRUE,
+             hide_wp = TRUE,
+             colour_palette = cols,
+             month_number_label = FALSE,
+             font_family = "Roboto Condensed"))
 
 ## PROJECT DETAILS
 observeEvent(input$newprojectDetailsTimelinelive, {

@@ -24,8 +24,14 @@ tabPanel("New Timeline",
          
          fluidRow(
            conditionalPanel("output.projectsNumberjustnumber == 'FALSE'",
-                            (column(12,plotOutput("newganttChart")
+                            conditionalPanel("input.newcompleted3 == 'Live Projects'",
+                                             (column(12,plotOutput("newganttChartlive")
          ))
+                            ),
+         conditionalPanel("input.newcompleted3 != 'Live Projects'",
+                          (column(12,plotOutput("newganttChartcompleted")
+                          ))
+                          )
          )),
          
          fluidRow(

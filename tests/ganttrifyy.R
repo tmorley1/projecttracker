@@ -73,12 +73,12 @@ ganttrifyy <- function(project,
   
   
   sequence_months <- seq.Date(from = min(df_yearmon[["start_date"]]),
-                              to = max(df_yearmon[["end_date"]]),
+                              to = max(df_yearmon[["end_date"]],df_yearmon[["spot_date"]]),
                               by = "1 month")
   
   if (length(sequence_months) %% 2 != 0) {
     sequence_months <- seq.Date(from = min(df_yearmon[["start_date"]]),
-                                to = max(df_yearmon[["end_date"]])+1,
+                                to = max(df_yearmon[["end_date"]],df_yearmon[["spot_date"]])+1,
                                 by = "1 month")
   }
   
@@ -91,16 +91,16 @@ ganttrifyy <- function(project,
   
   # date breaks in the middle of the month
   date_breaks <- zoo::as.Date(zoo::as.yearmon(seq.Date(from = min(df_yearmon[["start_date"]]+15),
-                                                       to = max(df_yearmon[["end_date"]]+15),
+                                                       to = max(df_yearmon[["end_date"]],df_yearmon[["spot_date"]])+15,
                                                        by =paste(month_breaks, "month"))), frac = 0.5)
   
   
   date_breaks_q <- seq.Date(from = lubridate::floor_date(x = min(df_yearmon[["start_date"]]), unit = "year"),
-                            to = lubridate::ceiling_date(x = max(df_yearmon[["end_date"]]), unit = "year"),
+                            to = lubridate::ceiling_date(x = max(df_yearmon[["end_date"]],df_yearmon[["spot_date"]]), unit = "year"),
                             by = "1 quarter")
   
   date_breaks_y <- seq.Date(from = lubridate::floor_date(x = min(df_yearmon[["start_date"]]), unit = "year"),
-                            to = lubridate::ceiling_date(x = max(df_yearmon[["end_date"]]), unit = "year"),
+                            to = lubridate::ceiling_date(x = max(df_yearmon[["end_date"]],df_yearmon[["spot_date"]]), unit = "year"),
                             by = "1 year")
   
   df_levels <- rev(df_yearmon %>%
@@ -113,7 +113,7 @@ ganttrifyy <- function(project,
       dplyr::bind_rows(activity = df,
                        wp = df %>%
                          dplyr::group_by(wp) %>%
-                         dplyr::summarise(activity = unique(wp), start_date = min(start_date), end_date = max(end_date)), .id = "type") %>%
+                         dplyr::summarise(activity = unique(wp), start_date = min(start_date), end_date = max(end_date, spot_date)), .id = "type") %>%
       dplyr::mutate(activity = factor(x = activity, levels = df_levels)) %>%
       dplyr::arrange(activity)
     
