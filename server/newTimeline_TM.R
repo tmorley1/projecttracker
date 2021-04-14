@@ -3,18 +3,21 @@
 
 ## Different options for options bar
 
+#Options to select which team is viewed
 output$newTimelineTeamSelector <- renderUI({ 
   confirmingButtons()
   Teams = sort(unique(unlist(strsplit((peopleData() %>% filter(CurrentlyInTeam))$Team,','))))
   checkboxGroupInput("newteam2", "Teams:", Teams, selected=Teams) 
 })
 
+#Options to select which members are viewed
 output$newTimelineTeamMemberSelector <- renderUI({ 
   confirmingButtons()
   Names = append("All", as.character(sort(unique((peopleData() %>% filter(CurrentlyInTeam) %>% filter(grepl(paste(input$newteam2, collapse='|'), Team)))$Name))))
   selectInput("newname2", "Name:", Names, Names[1]) 
 })
 
+#Options to select whether Completed or Live projects are viewed
 output$newTimelineCompletedProjects <- renderUI({ 
   confirmingButtons()
   selectInput("newcompleted3", "Completed Projects or Live Projects", c("Live Projects","Completed Projects"), selected = "Live Projects") 
@@ -23,33 +26,33 @@ output$newTimelineCompletedProjects <- renderUI({
 ## Reading in data
 
 newTimelineData <- reactive({
-  data <- if(input$newname2 == "All"){left_join(
-  tidyr::separate_rows(projectData(), TeamMembers, sep=" ,|, |,") %>%
-    rename(TeamMember = TeamMembers),
+  data <- if(input$newname2 == "All"){left_join(                                #if all members are selected
+  tidyr::separate_rows(projectData(), TeamMembers, sep=" ,|, |,") %>%           #reads in project data
+    rename(TeamMember = TeamMembers),                                           
   projectData() %>%
-  select(Name, TeamMembers)) %>%
-  left_join(peopleData(), by=c("TeamMember"="Name")) %>%
-  filter(grepl(paste(input$newteam2, collapse='|'), Team)) %>%
-  filter(Completed == ifelse(input$newcompleted3=="Live Projects", FALSE, TRUE)) %>%
-  filter(!duplicated(Name))%>%
-  mutate(Deadline = as.Date(Deadline, "%d/%m/%Y"),
-         StartDate = as.Date(StartDate, "%d/%m/%Y"),
-         DateCompleted = as.Date(DateCompleted, "%d/%m/%Y"),
+  select(Name, TeamMembers)) %>%                                                
+  left_join(peopleData(), by=c("TeamMember"="Name")) %>%                        #joins with people data
+  filter(grepl(paste(input$newteam2, collapse='|'), Team)) %>%                  #selects members associated with chosen team
+  filter(Completed == ifelse(input$newcompleted3=="Live Projects", FALSE, TRUE)) %>% #selects Live projects
+  filter(!duplicated(Name))%>%                                                  #removes duplicated names
+  mutate(Deadline = as.Date(Deadline, "%d/%m/%Y"),                              #reads in deadline as date
+         StartDate = as.Date(StartDate, "%d/%m/%Y"),                            #reads in start date as date
+         DateCompleted = as.Date(DateCompleted, "%d/%m/%Y"),                    #reads in completed date as date
          deadlinePassed = ifelse(Completed & (Deadline < DateCompleted), "Deadline Not Met",
                                  ifelse(Completed, "Deadline Met",
                                         ifelse(Deadline < Sys.Date(), "Passed Deadline","On Track")
-                                 )
+                                 )                                              #creates new column deadlinePassed
          ))%>%
-  select(Name,TeamMembers, Customer, StartDate, Deadline, DateCompleted, deadlinePassed, Completed, ProjectBrief, QALog)%>%
-  rename(activity = Name, wp=deadlinePassed, start_date=StartDate, end_date=DateCompleted, spot_date=Deadline)%>%
-  drop_na("start_date")%>%
-  mutate(spot_date = ifelse(Sys.Date()<spot_date, "", format(spot_date, "%d/%m/%Y")))%>%
-  mutate(spot_date = as.Date(spot_date, "%d/%m/%Y"))%>%
-  mutate(spot_type="D")%>%
-  mutate(end_date = ifelse(is.na(end_date),format(Sys.Date(), "%d/%m/%Y"),format(end_date, "%d/%m/%Y"))) %>%
-  mutate(end_date = as.Date(end_date, "%d/%m/%Y"))
+  select(Name,TeamMembers, Customer, StartDate, Deadline, DateCompleted, deadlinePassed, Completed, ProjectBrief, QALog)%>% #selects only relevant columns
+  rename(activity = Name, wp=deadlinePassed, start_date=StartDate, end_date=DateCompleted, spot_date=Deadline)%>% #renames columns for use in ganttrifyy function
+  drop_na("start_date")%>%                                                      #removes projects with no start date
+  mutate(spot_date = ifelse(Sys.Date()<spot_date, "", format(spot_date, "%d/%m/%Y")))%>% #if deadline has not yet been reached, this is not displayed on the gantt chart
+  mutate(spot_date = as.Date(spot_date, "%d/%m/%Y"))%>%                         #reads in deadline as date
+  mutate(spot_type="D")%>%                                                      #displays a D for deadline
+  mutate(end_date = ifelse(is.na(end_date),format(Sys.Date(), "%d/%m/%Y"),format(end_date, "%d/%m/%Y"))) %>% #if project is still live, then the end date is given as today's date for purposes of gantt chart
+  mutate(end_date = as.Date(end_date, "%d/%m/%Y"))                              #reads in end date as date
   }
-  else{
+  else{                                                                         #if a specific team member is selected
     left_join(
       tidyr::separate_rows(projectData(), TeamMembers, sep=" ,|, |,") %>%
         rename(TeamMember = TeamMembers),
