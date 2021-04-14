@@ -44,7 +44,6 @@ source("C:\\Users\\tmorley\\OneDrive - Department for Education\\Documents - Str
 cols <- c("Deadline Not Met" = "red", "Deadline Met" = "green", "Passed Deadline" = "red", "On Track" = "orange")
 
 ganttchart <- ganttrifyy(project = newTimelineData,
-          spots = newTimelineData,
           by_date = TRUE,
           exact_date = TRUE,
           month_number_label = FALSE,
@@ -53,3 +52,7 @@ ganttchart <- ganttrifyy(project = newTimelineData,
           font_family = "Roboto Condensed")
 
 print (ganttchart)
+
+ganttcharttest <- ggplotly(ganttchart)
+
+print(ganttcharttest)

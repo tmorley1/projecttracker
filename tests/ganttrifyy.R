@@ -141,20 +141,20 @@ ganttrifyy <- function(project,
     # background shaded bands
     ggplot2::geom_rect(data = date_range_df, ggplot2::aes(xmin = start,
                                                           xmax = end,
-                                                          ymin = -Inf,
-                                                          ymax = Inf),
+                                                          ymin = 0,
+                                                          ymax = nrow(project)+1),
                        inherit.aes=FALSE,
                        alpha = 0.4,
                        fill = colour_stripe) 
   
   if (mark_quarters == TRUE) {
     gg_gantt <- gg_gantt +
-      ggplot2::geom_vline(xintercept = date_breaks_q, colour = "gray50")
+      ggplot2::geom_vline(xintercept = as.numeric(date_breaks_q), colour = "gray50")
   }
   
   if (mark_years == TRUE) {
     gg_gantt <- gg_gantt +
-      ggplot2::geom_vline(xintercept = date_breaks_y, colour = "gray50")
+      ggplot2::geom_vline(xintercept = as.numeric(date_breaks_y), colour = "gray50")
   }
   
   # set alpha to 0 for wp
