@@ -10,7 +10,7 @@ library(treemap)
 library(lubridate)
 
 username <- "tmorley"#change to be your username
-dataPathway <- paste("C:\\Users\\", username, "\\OneDrive - Department for Education\\Documents - Strategic Operations Analysis Division\\General\\Project Tracker\\projecttracker\\", sep="")
+dataPathway <- paste("C:\\Users\\", username, "\\Department for Education\\Strategic Operations Analysis Division - Project Tracker\\projecttracker\\", sep="")
 
 
 # Functions ---------------------------------------------------------------
