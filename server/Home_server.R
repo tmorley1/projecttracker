@@ -15,7 +15,7 @@ output$project<- DT::renderDataTable(
   formatStyle('incomplete', target='row', backgroundColor=styleEqual(c(T,F), c('red', ''))))
 
 peopleData <- function() {
-  peopleData <- as.data.frame(read.csv(paste(dataPathway, "People.csv", sep="")))
+  peopleData <- as.data.frame(read.csv(paste(dataPathway, "Inputs\\People.csv", sep="")))
   peopleData
 }
 
@@ -32,7 +32,7 @@ list_current <- function() {
 }
 
 projectData <- function() {
-  projectData <- as.data.frame(read.csv(paste(dataPathway, "Projects.csv", sep="")))
+  projectData <- as.data.frame(read.csv(paste(dataPathway, "Inputs\\Projects.csv", sep="")))
   projectData
 }
  
@@ -49,17 +49,17 @@ confirmingButtons <- reactive({
 # functions to save changed data to file from the home page
 # removed comments from visibility for now
 saveChangesToPeopleFile <- function(data) {
-  if (file.exists(paste(dataPathway, "People.csv", sep=""))){
-    file.remove(paste(dataPathway, "People.csv", sep=""))
-    write.csv(data, paste(dataPathway, "People.csv", sep=""), row.names=FALSE)
+  if (file.exists(paste(dataPathway, "Inputs\\People.csv", sep=""))){
+    file.remove(paste(dataPathway, "Inputs\\People.csv", sep=""))
+    write.csv(data, paste(dataPathway, "Inputs\\People.csv", sep=""), row.names=FALSE)
     output$people <-  DT::renderDataTable(peopleData() %>% filter(CurrentlyInTeam == "TRUE") %>% select(-CurrentlyInTeam), server = FALSE, selection='single')
     peopleData <<- peopleData()
   }
 }
 saveChangesToProjectFile <- function(data) {
-  if (file.exists(paste(dataPathway, "Projects.csv", sep=""))){
-    file.remove(paste(dataPathway, "Projects.csv", sep=""))
-    write.csv(data, paste(dataPathway, "Projects.csv", sep=""), row.names=FALSE)
+  if (file.exists(paste(dataPathway, "Inputs\\Projects.csv", sep=""))){
+    file.remove(paste(dataPathway, "Inputs\\Projects.csv", sep=""))
+    write.csv(data, paste(dataPathway, "Inputs\\Projects.csv", sep=""), row.names=FALSE)
     output$project <- DT::renderDataTable(data %>% select(-Comments, -Documentation), server = FALSE, selection='single')
     projectData <<- projectData()
   }

@@ -109,7 +109,7 @@ output$newTimeLineTablecompleted <- DT::renderDataTable(newTimelineData()%>%rena
 
 ## Creating gantt chart
 
-source("C:\\Users\\tmorley\\OneDrive - Department for Education\\Documents - Strategic Operations Analysis Division\\General\\Project Tracker_TM\\projecttracker\\tests\\ganttrifyy.R")
+source(paste(dataPathway, "tests\\ganttrifyy.R", sep=""))
 
 cols <- c("Deadline Not Met" = "red", "Deadline Met" = "green", "Passed Deadline" = "red", "On Track" = "green")
 

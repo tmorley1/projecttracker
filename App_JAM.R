@@ -10,19 +10,19 @@ library(treemap)
 library(lubridate)
 
 username <- "tmorley"#change to be your username
-dataPathway <- paste("C:\\Users\\", username, "\\OneDrive - Department for Education\\Documents - Strategic Operations Analysis Division\\General\\Project Tracker\\projecttracker\\", sep="")
+dataPathway <- paste("C:\\Users\\", username, "\\OneDrive - Department for Education\\Documents - Strategic Operations Analysis Division\\General\\Project Tracker_TM\\projecttracker\\Inputs\\", sep="")
 
 
 # Functions ---------------------------------------------------------------
 
 
 peopleData <- function() {
-  peopleData <- as.data.frame(read.csv(paste(dataPathway, "Inputs\\People.csv", sep="")))
+  peopleData <- as.data.frame(read.csv(paste(dataPathway, "People.csv", sep="")))
   peopleData
 }
 
 projectData <- function() {
-  projectData <- as.data.frame(read.csv(paste(dataPathway, "Inputs\\Projects.csv", sep="")))
+  projectData <- as.data.frame(read.csv(paste(dataPathway, "Projects.csv", sep="")))
   projectData
 }
 
@@ -44,6 +44,7 @@ projectDetails <- function(dataSource, inputRow) {
       }
     }
   }
+  
   
   daysToDeadline <-
     if(as.Date(project[1,6], "%d/%m/%Y")< Sys.Date()){
@@ -120,20 +121,20 @@ projectDetails <- function(dataSource, inputRow) {
 
 ui <- navbarPage("Project Management",
                  theme = shinytheme("united"),
-                 source(paste(dataPathway, "ui\\TeamOverview_ui.R", sep=""), local=TRUE)$value,
-                 source(paste(dataPathway, "ui\\PersonOverview_ui.R", sep=""), local=TRUE)$value,
-                 source(paste(dataPathway, "ui\\Timeline_ui.R", sep=""), local=TRUE)$value,
-                 source(paste(dataPathway, "ui\\Home_ui.R", sep=""), local=TRUE)$value,
-                 source(paste(dataPathway, "ui\\newTimeline_ui.R", sep=""), local=TRUE)$value,
+                 source(paste("C:\\Users\\", username, "\\OneDrive - Department for Education\\Documents - Strategic Operations Analysis Division\\General\\Project Tracker_TM\\projecttracker\\ui\\TeamOverview_TM.R", sep=""), local=TRUE)$value,
+                 source(paste("C:\\Users\\", username, "\\OneDrive - Department for Education\\Documents - Strategic Operations Analysis Division\\General\\Project Tracker_TM\\projecttracker\\ui\\PersonOverview_TM.R", sep=""), local=TRUE)$value,
+                 source(paste("C:\\Users\\", username, "\\OneDrive - Department for Education\\Documents - Strategic Operations Analysis Division\\General\\Project Tracker_TM\\projecttracker\\ui\\Timeline_TM.R", sep=""), local=TRUE)$value,
+                 source(paste("C:\\Users\\", username, "\\OneDrive - Department for Education\\Documents - Strategic Operations Analysis Division\\General\\Project Tracker_TM\\projecttracker\\ui\\Home_TM.R", sep=""), local=TRUE)$value,            
+                 source(paste("C:\\Users\\", username, "\\OneDrive - Department for Education\\Documents - Strategic Operations Analysis Division\\General\\Project Tracker_TM\\projecttracker\\ui\\newTimeline_TM.R", sep=""), local=TRUE)$value,
                  tags$head(tags$style("h5{color: red;}")) # making error messages red
 )
 
 server <- function(input, output, session) {
-  source(paste(dataPathway, "server\\TeamOverview_server.R", sep=""), local=TRUE)$value
-  source(paste(dataPathway, "server\\PersonOverview_server.R", sep=""), local=TRUE)$value
-  source(paste(dataPathway, "server\\Timeline_server.R", sep=""), local=TRUE)$value
-  source(paste(dataPathway, "server\\Home_server.R", sep=""), local=TRUE)$value
-  source(paste(dataPathway, "server\\newTimeline_server.R", sep=""), local=TRUE)$value
+  source(paste("C:\\Users\\", username, "\\OneDrive - Department for Education\\Documents - Strategic Operations Analysis Division\\General\\Project Tracker_TM\\projecttracker\\server\\Home_TM.R", sep=""), local=TRUE)$value
+  source(paste("C:\\Users\\", username, "\\OneDrive - Department for Education\\Documents - Strategic Operations Analysis Division\\General\\Project Tracker_TM\\projecttracker\\server\\TeamOverview_TM.R", sep=""), local=TRUE)$value
+  source(paste("C:\\Users\\", username, "\\OneDrive - Department for Education\\Documents - Strategic Operations Analysis Division\\General\\Project Tracker_TM\\projecttracker\\server\\PersonOverview_TM.R", sep=""), local=TRUE)$value
+  source(paste("C:\\Users\\", username, "\\OneDrive - Department for Education\\Documents - Strategic Operations Analysis Division\\General\\Project Tracker_TM\\projecttracker\\server\\Timeline_TM.R", sep=""), local=TRUE)$value
+  source(paste("C:\\Users\\", username, "\\OneDrive - Department for Education\\Documents - Strategic Operations Analysis Division\\General\\Project Tracker_TM\\projecttracker\\server\\newTimeline_TM.R", sep=""), local=TRUE)$value  
 }
 
 shinyApp(ui,server)
