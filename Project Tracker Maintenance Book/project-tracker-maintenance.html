@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>The Project Tracker</title>
+  <meta name="description" content="The Project Tracker" />
+  <meta name="generator" content="bookdown 0.17 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="The Project Tracker" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="The Project Tracker" />
+  
+  
+  
+
+<meta name="author" content="Elizabeth Greenwood" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+
+<link rel="next" href="deployment.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.9.1/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-1.49.4/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-1.49.4/plotly-latest.min.js"></script>
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="project-tracker-maintenance.html"><a href="project-tracker-maintenance.html"><i class="fa fa-check"></i><b>1</b> Project Tracker Maintenance</a></li>
+<li class="chapter" data-level="2" data-path="deployment.html"><a href="deployment.html"><i class="fa fa-check"></i><b>2</b> Deployment</a></li>
+<li class="chapter" data-level="3" data-path="file-structure.html"><a href="file-structure.html"><i class="fa fa-check"></i><b>3</b> File Structure</a><ul>
+<li class="chapter" data-level="3.1" data-path="file-structure.html"><a href="file-structure.html#input-folder"><i class="fa fa-check"></i><b>3.1</b> Input folder</a></li>
+<li class="chapter" data-level="3.2" data-path="file-structure.html"><a href="file-structure.html#app.r-file"><i class="fa fa-check"></i><b>3.2</b> App.R file</a></li>
+<li class="chapter" data-level="3.3" data-path="file-structure.html"><a href="file-structure.html#ui-folder"><i class="fa fa-check"></i><b>3.3</b> ui folder</a></li>
+<li class="chapter" data-level="3.4" data-path="file-structure.html"><a href="file-structure.html#server-folder"><i class="fa fa-check"></i><b>3.4</b> server folder</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="version-control.html"><a href="version-control.html"><i class="fa fa-check"></i><b>4</b> Version Control</a></li>
+<li class="chapter" data-level="5" data-path="shiny-help.html"><a href="shiny-help.html"><i class="fa fa-check"></i><b>5</b> Shiny Help</a><ul>
+<li class="chapter" data-level="5.1" data-path="shiny-help.html"><a href="shiny-help.html#reactivity"><i class="fa fa-check"></i><b>5.1</b> Reactivity</a></li>
+<li class="chapter" data-level="5.2" data-path="shiny-help.html"><a href="shiny-help.html#execution-of-commands"><i class="fa fa-check"></i><b>5.2</b> Execution of commands</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="editing-the-home-page.html"><a href="editing-the-home-page.html"><i class="fa fa-check"></i><b>6</b> Editing the Home Page</a><ul>
+<li class="chapter" data-level="6.1" data-path="editing-the-home-page.html"><a href="editing-the-home-page.html#setting-up-section"><i class="fa fa-check"></i><b>6.1</b> Setting up section</a></li>
+<li class="chapter" data-level="6.2" data-path="editing-the-home-page.html"><a href="editing-the-home-page.html#people-table-section"><i class="fa fa-check"></i><b>6.2</b> People Table Section</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="editing-the-home-page.html"><a href="editing-the-home-page.html#adding-a-person"><i class="fa fa-check"></i><b>6.2.1</b> Adding a person</a></li>
+<li class="chapter" data-level="6.2.2" data-path="editing-the-home-page.html"><a href="editing-the-home-page.html#editing-a-person"><i class="fa fa-check"></i><b>6.2.2</b> Editing a Person</a></li>
+<li class="chapter" data-level="6.2.3" data-path="editing-the-home-page.html"><a href="editing-the-home-page.html#removing-a-person"><i class="fa fa-check"></i><b>6.2.3</b> Removing a Person</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="editing-the-home-page.html"><a href="editing-the-home-page.html#project-table-section"><i class="fa fa-check"></i><b>6.3</b> Project Table Section</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="editing-the-home-page.html"><a href="editing-the-home-page.html#adding-a-project"><i class="fa fa-check"></i><b>6.3.1</b> Adding a Project</a></li>
+<li class="chapter" data-level="6.3.2" data-path="editing-the-home-page.html"><a href="editing-the-home-page.html#editing-a-project"><i class="fa fa-check"></i><b>6.3.2</b> Editing a Project</a></li>
+<li class="chapter" data-level="6.3.3" data-path="editing-the-home-page.html"><a href="editing-the-home-page.html#deleting-a-project"><i class="fa fa-check"></i><b>6.3.3</b> Deleting a Project</a></li>
+<li class="chapter" data-level="6.3.4" data-path="editing-the-home-page.html"><a href="editing-the-home-page.html#getting-a-projects-details"><i class="fa fa-check"></i><b>6.3.4</b> Getting a Project’s Details</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="editing-the-overview-pages.html"><a href="editing-the-overview-pages.html"><i class="fa fa-check"></i><b>7</b> Editing the Overview Pages</a><ul>
+<li class="chapter" data-level="7.1" data-path="editing-the-overview-pages.html"><a href="editing-the-overview-pages.html#team-overview"><i class="fa fa-check"></i><b>7.1</b> Team overview</a><ul>
+<li class="chapter" data-level="7.1.1" data-path="editing-the-overview-pages.html"><a href="editing-the-overview-pages.html#bar-chart-number-of-projects-each-team-member-currently-has"><i class="fa fa-check"></i><b>7.1.1</b> Bar chart: number of projects each team member currently has</a></li>
+<li class="chapter" data-level="7.1.2" data-path="editing-the-overview-pages.html"><a href="editing-the-overview-pages.html#pie-chart-no.-projects-at-each-rag-rating"><i class="fa fa-check"></i><b>7.1.2</b> Pie chart: No. Projects at each RAG rating</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="editing-the-overview-pages.html"><a href="editing-the-overview-pages.html#people-overview"><i class="fa fa-check"></i><b>7.2</b> People Overview</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">The Project Tracker</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="header">
+<h1 class="title">The Project Tracker</h1>
+<p class="author"><em>Elizabeth Greenwood</em></p>
+</div>
+<div id="project-tracker-maintenance" class="section level1">
+<h1><span class="header-section-number">1</span> Project Tracker Maintenance</h1>
+<p>The project tracker was designed to track the projects of all the people in the team with the aim to help you plan appropriately for the capacity of the team, and give enough room to complete high quality projects in a timely manner.</p>
+<p>Made in R shiny, the R Shiny tracker allows you to add team members to a specific team and then add projects that those team members are associated too. Everyone has the same access to everything as everyone else so team members can update the information about their own projects.</p>
+<p>For each projects a handful of standard information is asked for. The information asked for is as follows:</p>
+<ul>
+<li>Project Name</li>
+<li>Team members involved in the project</li>
+<li>The customer</li>
+<li>Whether the project has a QA Log and project brief</li>
+<li>The date of the deadline of the project</li>
+<li>A Rag rating of the project</li>
+<li>a link to where the project documentation is stored</li>
+<li>and a checkbox to click once the project has been completed</li>
+</ul>
+<p>Using this information the tracker has 2 summary pages currently: Team Overview and Person Overview. Team Overview to allow you to select a team from a drop down box and see visualisations of the projects where only projects that team members of the selected team are shown. Similarly the person overview allows you to pick a person afrom a drop down box and see a table of only the projects theyt are involved with.</p>
+<p>The project tracker has a working version which is deployed locally where data files are stored in teams. The set up guide to use the working project tracker is <a href="https://educationgovuk.sharepoint.com/sites/StrategicFinancialAnalysis2/Shared%20Documents/Forms/AllItems.aspx?id=%2Fsites%2FStrategicFinancialAnalysis2%2FShared%20Documents%2FGeneral%2FProject%20Tracker%2FProject%2DTracker%2DSet%2Dup%2Ehtml&amp;parent=%2Fsites%2FStrategicFinancialAnalysis2%2FShared%20Documents%2FGeneral%2FProject%20Tracker">here</a></p>
+<p>The project tracker is version controlled usinng Azure DeVops. This will be discussed later in further detail but if you would like to clone the repository you can find the link <a href="https://dfe-gov-uk.visualstudio.com/Strategic%20Financial%20Analysis/_git/Project%20Tracker">here</a> by clicking the clone button.</p>
+<p>The documentation for the project tracker which is where any isues, risks and improvements are logged as well as the QA Log and project brief can be found <a href="https://educationgovuk.sharepoint.com/sites/StrategicFinancialAnalysis2/_layouts/15/Doc.aspx?sourcedoc=%7B13E50B1D-586F-4A5D-BB1D-6C3DB91E37BE%7D&amp;file=Project%20Tracker%20Documentation.xlsx&amp;action=default&amp;mobileredirect=true&amp;CT=1584021021789&amp;OR=ItemsView">here</a></p>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+
+<a href="deployment.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+},
+"search": false
+});
+});
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>3 File Structure | The Project Tracker</title>
+  <meta name="description" content="3 File Structure | The Project Tracker" />
+  <meta name="generator" content="bookdown 0.17 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="3 File Structure | The Project Tracker" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="3 File Structure | The Project Tracker" />
+  
+  
+  
+
+<meta name="author" content="Elizabeth Greenwood" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="deployment.html"/>
+<link rel="next" href="version-control.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.9.1/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-1.49.4/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-1.49.4/plotly-latest.min.js"></script>
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="project-tracker-maintenance.html"><a href="project-tracker-maintenance.html"><i class="fa fa-check"></i><b>1</b> Project Tracker Maintenance</a></li>
+<li class="chapter" data-level="2" data-path="deployment.html"><a href="deployment.html"><i class="fa fa-check"></i><b>2</b> Deployment</a></li>
+<li class="chapter" data-level="3" data-path="file-structure.html"><a href="file-structure.html"><i class="fa fa-check"></i><b>3</b> File Structure</a><ul>
+<li class="chapter" data-level="3.1" data-path="file-structure.html"><a href="file-structure.html#input-folder"><i class="fa fa-check"></i><b>3.1</b> Input folder</a></li>
+<li class="chapter" data-level="3.2" data-path="file-structure.html"><a href="file-structure.html#app.r-file"><i class="fa fa-check"></i><b>3.2</b> App.R file</a></li>
+<li class="chapter" data-level="3.3" data-path="file-structure.html"><a href="file-structure.html#ui-folder"><i class="fa fa-check"></i><b>3.3</b> ui folder</a></li>
+<li class="chapter" data-level="3.4" data-path="file-structure.html"><a href="file-structure.html#server-folder"><i class="fa fa-check"></i><b>3.4</b> server folder</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="version-control.html"><a href="version-control.html"><i class="fa fa-check"></i><b>4</b> Version Control</a></li>
+<li class="chapter" data-level="5" data-path="shiny-help.html"><a href="shiny-help.html"><i class="fa fa-check"></i><b>5</b> Shiny Help</a><ul>
+<li class="chapter" data-level="5.1" data-path="shiny-help.html"><a href="shiny-help.html#reactivity"><i class="fa fa-check"></i><b>5.1</b> Reactivity</a></li>
+<li class="chapter" data-level="5.2" data-path="shiny-help.html"><a href="shiny-help.html#execution-of-commands"><i class="fa fa-check"></i><b>5.2</b> Execution of commands</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="editing-the-home-page.html"><a href="editing-the-home-page.html"><i class="fa fa-check"></i><b>6</b> Editing the Home Page</a><ul>
+<li class="chapter" data-level="6.1" data-path="editing-the-home-page.html"><a href="editing-the-home-page.html#setting-up-section"><i class="fa fa-check"></i><b>6.1</b> Setting up section</a></li>
+<li class="chapter" data-level="6.2" data-path="editing-the-home-page.html"><a href="editing-the-home-page.html#people-table-section"><i class="fa fa-check"></i><b>6.2</b> People Table Section</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="editing-the-home-page.html"><a href="editing-the-home-page.html#adding-a-person"><i class="fa fa-check"></i><b>6.2.1</b> Adding a person</a></li>
+<li class="chapter" data-level="6.2.2" data-path="editing-the-home-page.html"><a href="editing-the-home-page.html#editing-a-person"><i class="fa fa-check"></i><b>6.2.2</b> Editing a Person</a></li>
+<li class="chapter" data-level="6.2.3" data-path="editing-the-home-page.html"><a href="editing-the-home-page.html#removing-a-person"><i class="fa fa-check"></i><b>6.2.3</b> Removing a Person</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="editing-the-home-page.html"><a href="editing-the-home-page.html#project-table-section"><i class="fa fa-check"></i><b>6.3</b> Project Table Section</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="editing-the-home-page.html"><a href="editing-the-home-page.html#adding-a-project"><i class="fa fa-check"></i><b>6.3.1</b> Adding a Project</a></li>
+<li class="chapter" data-level="6.3.2" data-path="editing-the-home-page.html"><a href="editing-the-home-page.html#editing-a-project"><i class="fa fa-check"></i><b>6.3.2</b> Editing a Project</a></li>
+<li class="chapter" data-level="6.3.3" data-path="editing-the-home-page.html"><a href="editing-the-home-page.html#deleting-a-project"><i class="fa fa-check"></i><b>6.3.3</b> Deleting a Project</a></li>
+<li class="chapter" data-level="6.3.4" data-path="editing-the-home-page.html"><a href="editing-the-home-page.html#getting-a-projects-details"><i class="fa fa-check"></i><b>6.3.4</b> Getting a Project’s Details</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="editing-the-overview-pages.html"><a href="editing-the-overview-pages.html"><i class="fa fa-check"></i><b>7</b> Editing the Overview Pages</a><ul>
+<li class="chapter" data-level="7.1" data-path="editing-the-overview-pages.html"><a href="editing-the-overview-pages.html#team-overview"><i class="fa fa-check"></i><b>7.1</b> Team overview</a><ul>
+<li class="chapter" data-level="7.1.1" data-path="editing-the-overview-pages.html"><a href="editing-the-overview-pages.html#bar-chart-number-of-projects-each-team-member-currently-has"><i class="fa fa-check"></i><b>7.1.1</b> Bar chart: number of projects each team member currently has</a></li>
+<li class="chapter" data-level="7.1.2" data-path="editing-the-overview-pages.html"><a href="editing-the-overview-pages.html#pie-chart-no.-projects-at-each-rag-rating"><i class="fa fa-check"></i><b>7.1.2</b> Pie chart: No. Projects at each RAG rating</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="editing-the-overview-pages.html"><a href="editing-the-overview-pages.html#people-overview"><i class="fa fa-check"></i><b>7.2</b> People Overview</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">The Project Tracker</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="file-structure" class="section level1">
+<h1><span class="header-section-number">3</span> File Structure</h1>
+<p>There are 3 main directories required for the project tracker and one file on its own. They are as follows:</p>
+<ul>
+<li>Inputs</li>
+<li>server</li>
+<li>ui</li>
+<li>App.r</li>
+</ul>
+<p>The Input folder must be accessible to all members of the team and they must be able to write to and delete the files within the Inputs folder from within R. As everyone runs the code from their own device, to make running the tracker from R the easiest possible all files are kept within the SOAD sharepoint site. This is the sharepoint library which you will have synced to your area when setting up the project tracker.</p>
+<p>Having the files stored in SharePoint makes it easier as each team member only needs to have one file for the project tracker saved in their personal area and this file will only need updating if there are more pages added to the application. Otherwise updating the app will be seamless.</p>
+<div id="input-folder" class="section level2">
+<h2><span class="header-section-number">3.1</span> Input folder</h2>
+<p>The input folder has all the data rewuired for the application to run and where the information taht people enter into the application is stored. Currently there are 2 data files: <code>peopleData.csv</code> and <code>projectData.csv</code>.</p>
+<p><code>peopleData.csv</code> has the following fields:</p>
+<ul>
+<li><code>Name</code></li>
+<li><code>Team</code></li>
+<li><code>CurrentlyInTeam</code></li>
+</ul>
+<p><code>CurrentlyInTeam</code> isn’t displayed anywhere within the tracker. This is do that when a person is ‘removed’ there still exists a record of what projects they worked on</p>
+<p><code>projectData.csv</code> has the following fields</p>
+<ul>
+<li><code>Name</code></li>
+<li><code>TeamMember</code></li>
+<li><code>Customer</code></li>
+<li><code>ProjectBrief</code></li>
+<li><code>QALog</code></li>
+<li><code>Deadline</code></li>
+<li><code>RAG</code></li>
+<li><code>Completed</code></li>
+<li><code>Comments</code></li>
+<li><code>Documentation</code></li>
+</ul>
+<p><code>Comments</code> and <code>Documentaion</code> cannot be seen in the project table on the home page of the application, but if you click the details of project button (after selecting a project), the <code>Comments</code> field is split by a semi-colon delimeter and made into bullet points so it is easy to read and if there is a link entered in for the <code>Documentation</code> field there will be a hyperlink saying ‘Click here!’ which will follow the link entered.</p>
+</div>
+<div id="app.r-file" class="section level2">
+<h2><span class="header-section-number">3.2</span> App.R file</h2>
+<p>All the code for the entire app could be held in the same file, this file - <code>App.r</code>. The problem with this is that it will create a very long file type as the <code>Home.R</code> file in the server folder on its own has 450&lt; lines of code. This makes the code un-readable and hard to understand. therefore this file links to other files in neat sections making the application easier to edit.</p>
+<p>This also makes it easier to update as these can be edited wthout having the rest of the team having to do anythin (like re-download the <code>App.R</code> file and enter their username in again).</p>
+<p><code>App.R</code> has three components:</p>
+<ul>
+<li>user interface object</li>
+<li>server function-</li>
+<li>call to the shinyApp function</li>
+<li>Version control</li>
+</ul>
+<p>The user interface (ui) object controls the layout and appearance of your app. The server function contains the instructions that your computer needs to build your app and the shinyApp function creates Shiny app objects from an explicit UI/server pair.</p>
+<p>As you can probably guess the ui folder contains code for the user interface amd the server folder contains instructions. In each of the folders there are 3 files with the exact same name in both folders:</p>
+<ul>
+<li><code>Home.R</code></li>
+<li><code>PersonOverview.R</code></li>
+<li><code>TeamOverview.R</code></li>
+</ul>
+<p>These names correspond to the different pages of the application.</p>
+</div>
+<div id="ui-folder" class="section level2">
+<h2><span class="header-section-number">3.3</span> ui folder</h2>
+<p>The tracker uses navbarPage so that there can be multiple pages connected via a navbar. If this was not neccessary fluidPage could have been used. Each file contains a <code>tabPanel()</code> with all the code wrapped around by this <code>tabPanel</code>. This is how the computer knows what is meant to go on each page of the application.</p>
+<p>Elements like <code>titlePanel</code> and <code>sidebarLayout</code> create a basic layout for a Shiny app, but more advanced layouts can be created. <code>fluidRow</code> and <code>column</code> can be used to build a layout up from a grid system. This is what is used in the prokect tracker. These can be described as <code>panel</code> funcitons.</p>
+<p>You can add content to your Shiny app by placing it inside a <code>Panel</code> function, for example just adding a character string. To add more advanced content you can use Shiny’s HTML tag functions. These functions parallel common HTML5 tags. Below you can see a few of them</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">shiny.function</th>
+<th align="left">HTML5.equivalent</th>
+<th align="left">Creates</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><code>p</code></td>
+<td align="left"><code>&lt;p&gt;</code></td>
+<td align="left">A paragraph of text</td>
+</tr>
+<tr class="even">
+<td align="left"><code>h1</code></td>
+<td align="left"><code>&lt;h1&gt;</code></td>
+<td align="left">A first level header</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>h2</code></td>
+<td align="left"><code>&lt;h2&gt;</code></td>
+<td align="left">A second level header</td>
+</tr>
+<tr class="even">
+<td align="left"><code>h3</code></td>
+<td align="left"><code>&lt;h3&gt;</code></td>
+<td align="left">A third level header</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>h4</code></td>
+<td align="left"><code>&lt;h4&gt;</code></td>
+<td align="left">A fourth level header</td>
+</tr>
+<tr class="even">
+<td align="left"><code>h5</code></td>
+<td align="left"><code>&lt;h5&gt;</code></td>
+<td align="left">A fifth level header</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>h6</code></td>
+<td align="left"><code>&lt;h6&gt;</code></td>
+<td align="left">A sixth level header</td>
+</tr>
+<tr class="even">
+<td align="left"><code>a</code></td>
+<td align="left"><code>&lt;a&gt;</code></td>
+<td align="left">A hyper link</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>br</code></td>
+<td align="left"><code>&lt;br&gt;</code></td>
+<td align="left">A line break (e.g. a blank line)</td>
+</tr>
+<tr class="even">
+<td align="left"><code>div</code></td>
+<td align="left"><code>&lt;div&gt;</code></td>
+<td align="left">A division of text with a uniform style</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>span</code></td>
+<td align="left"><code>&lt;span&gt;</code></td>
+<td align="left">An in-line division of text with a uniform style</td>
+</tr>
+<tr class="even">
+<td align="left"><code>pre</code></td>
+<td align="left"><code>&lt;pre&gt;</code></td>
+<td align="left">Text ‘as is’ in a fixed width font</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>code</code></td>
+<td align="left"><code>&lt;code&gt;</code></td>
+<td align="left">A formatted block of code</td>
+</tr>
+<tr class="even">
+<td align="left"><code>img</code></td>
+<td align="left"><code>&lt;img&gt;</code></td>
+<td align="left">An image</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>strong</code></td>
+<td align="left"><code>&lt;strong&gt;</code></td>
+<td align="left">Bold text</td>
+</tr>
+<tr class="even">
+<td align="left"><code>em</code></td>
+<td align="left"><code>&lt;em&gt;</code></td>
+<td align="left">Italicized text</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>HTML</code></td>
+<td align="left"></td>
+<td align="left">Directly passes a character string as HTML code</td>
+</tr>
+</tbody>
+</table>
+<p>If you would like to understand this more, a tutorial can be found <a href="https://www.w3schools.com/html/html_intro.asp">here</a>. With the above information you should be able to understand what everything within the code id doing, but to understand how to change how elements are arranged it would be worth understanding a bit more about <code>HTML</code> and <code>CSS</code>. Currently the <code>CSS</code> being used was</p>
+<p>The one thing which is quite important when maintaining/updating the ui section of the application is understanding the importance of indenting. Indenting the code makes it much easier to read and understand how the ui works. This is because there is a lot of nested elements. Many errors can be caused by mis-matched brackets or missing commas and these take time to find when the code IS properly indented - when it is not indented this could take HOURS!</p>
+</div>
+<div id="server-folder" class="section level2">
+<h2><span class="header-section-number">3.4</span> server folder</h2>
+<p>The server folder is where all the code goes which is similar to the code you will have written if you have ever used R in any capacity. The only difference between this R code and code you have previously written is to do with reactivity and using inputs from the user to enter data and filter data accordingly. Reactivity is decribed in much greater detail later on - section 5 focusses on help with using Shiny!</p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="deployment.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="version-control.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+},
+"search": false
+});
+});
+</script>
+
+</body>
+
+</html>

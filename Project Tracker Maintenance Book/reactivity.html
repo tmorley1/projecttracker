@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>5 Reactivity | The Project Tracker</title>
+  <meta name="description" content="5 Reactivity | The Project Tracker" />
+  <meta name="generator" content="bookdown 0.17 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="5 Reactivity | The Project Tracker" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="5 Reactivity | The Project Tracker" />
+  
+  
+  
+
+<meta name="author" content="Elizabeth Greenwood" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="version-control.html"/>
+<link rel="next" href="editing-the-home-page.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="project-tracker-maintenance.html"><a href="project-tracker-maintenance.html"><i class="fa fa-check"></i><b>1</b> Project Tracker Maintenance</a></li>
+<li class="chapter" data-level="2" data-path="deployment.html"><a href="deployment.html"><i class="fa fa-check"></i><b>2</b> Deployment</a><ul>
+<li class="chapter" data-level="2.1" data-path="deployment.html"><a href="deployment.html#current-solution-deploying-locally"><i class="fa fa-check"></i><b>2.1</b> Current Solution: Deploying Locally</a></li>
+<li class="chapter" data-level="2.2" data-path="deployment.html"><a href="deployment.html#r-studio-connect"><i class="fa fa-check"></i><b>2.2</b> R Studio Connect</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="file-structure.html"><a href="file-structure.html"><i class="fa fa-check"></i><b>3</b> File Structure</a><ul>
+<li class="chapter" data-level="3.1" data-path="file-structure.html"><a href="file-structure.html#input-folder"><i class="fa fa-check"></i><b>3.1</b> Input folder</a></li>
+<li class="chapter" data-level="3.2" data-path="file-structure.html"><a href="file-structure.html#app.r-file"><i class="fa fa-check"></i><b>3.2</b> App.R file</a></li>
+<li class="chapter" data-level="3.3" data-path="file-structure.html"><a href="file-structure.html#ui-folder"><i class="fa fa-check"></i><b>3.3</b> ui folder</a></li>
+<li class="chapter" data-level="3.4" data-path="file-structure.html"><a href="file-structure.html#server-folder"><i class="fa fa-check"></i><b>3.4</b> server folder</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="version-control.html"><a href="version-control.html"><i class="fa fa-check"></i><b>4</b> Version Control</a></li>
+<li class="chapter" data-level="5" data-path="reactivity.html"><a href="reactivity.html"><i class="fa fa-check"></i><b>5</b> Reactivity</a></li>
+<li class="chapter" data-level="6" data-path="editing-the-home-page.html"><a href="editing-the-home-page.html"><i class="fa fa-check"></i><b>6</b> Editing the Home Page</a></li>
+<li class="chapter" data-level="7" data-path="editing-the-overview-pages.html"><a href="editing-the-overview-pages.html"><i class="fa fa-check"></i><b>7</b> Editing the Overview Pages</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">The Project Tracker</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="reactivity" class="section level1">
+<h1><span class="header-section-number">5</span> Reactivity</h1>
+<p>The reactive elements in Shiny are the only reason why Shiny exists. This is a very important aspect of R Shiny. This section explains very basically how reactivity works within Shiny. For more information look at working through a shiny tutorial. Click <a href="https://shiny.rstudio.com/tutorial/">here</a> to find an online tutorial which is very useful (the written tutorial from this guide was used when writing the rest of this section)</p>
+<p>Shiny provides a family of functions that turn R objects into outputs for the interface of the application e.g. tables or graphs. Each function creates a specific type of output, here are some examples:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Output.function</th>
+<th align="left">Creates</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><code>dataTableOutput</code></td>
+<td align="left">Data Table</td>
+</tr>
+<tr class="even">
+<td align="left"><code>htmlOutput</code></td>
+<td align="left">raw HTML</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>imageOutput</code></td>
+<td align="left">image</td>
+</tr>
+<tr class="even">
+<td align="left"><code>plotOutput</code></td>
+<td align="left">plot</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>tableOutput</code></td>
+<td align="left">table</td>
+</tr>
+<tr class="even">
+<td align="left"><code>textOutput</code></td>
+<td align="left">text</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>uiOutput</code></td>
+<td align="left">raw HTML</td>
+</tr>
+<tr class="even">
+<td align="left"><code>verbatimTextOutput</code></td>
+<td align="left">text</td>
+</tr>
+</tbody>
+</table>
+<p>In order to output an R object you need ti provide the R code to build the object. Placing a function in <code>ui</code> tells Shiny where to display your object, but you need to tell Shiny how to build the object. The code you need to provide the code to build the R function within the server function. The server function plays an important role in the Shiny process; it builds a list-like object that contains all of the code needed to update the R objects in your app. Each R object needs to have its own entry in the list. You can create an entry by defining a new element for output within the server function, like below. The element name should match thename of the reactive element that you created in the <code>ui</code>.</p>
+<p>Below is an example of what the code for s imple app looks like:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(shiny)
+
+ui &lt;-<span class="st"> </span><span class="kw">fluidPage</span>(
+  <span class="kw">titlePanel</span>(<span class="st">&quot;censusVis&quot;</span>),
+  <span class="kw">sidebarLayout</span>(
+    <span class="kw">sidebarPanel</span>(
+      <span class="kw">helpText</span>(<span class="st">&quot;Create demographic maps with </span>
+<span class="st">               information from the 2010 US Census.&quot;</span>),
+      <span class="kw">selectInput</span>(<span class="st">&quot;var&quot;</span>, 
+                  <span class="dt">label =</span> <span class="st">&quot;Choose a variable to display&quot;</span>,
+                  <span class="dt">choices =</span> <span class="kw">c</span>(<span class="st">&quot;Percent White&quot;</span>, 
+                              <span class="st">&quot;Percent Black&quot;</span>,
+                              <span class="st">&quot;Percent Hispanic&quot;</span>, 
+                              <span class="st">&quot;Percent Asian&quot;</span>),
+                  <span class="dt">selected =</span> <span class="st">&quot;Percent White&quot;</span>)
+    ),
+    <span class="kw">mainPanel</span>(
+      <span class="kw">textOutput</span>(<span class="st">&quot;selected_var&quot;</span>)
+    )
+  )
+)
+
+server &lt;-<span class="st"> </span><span class="cf">function</span>(input, output) {
+  <span class="co"># rendering the output &#39;selected_var&#39; in the mainPanel of the ui</span>
+  output<span class="op">$</span>selected_var &lt;-<span class="st"> </span><span class="kw">renderText</span>({ 
+    <span class="kw">paste</span>(<span class="st">&quot;You have selected&quot;</span>, input<span class="op">$</span>var) <span class="co"># input from the select imput in the ui named &#39;var&#39;</span>
+  })
+}
+
+<span class="kw">shinyApp</span>(ui, server)</code></pre></div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="version-control.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="editing-the-home-page.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+},
+"search": false
+});
+});
+</script>
+
+</body>
+
+</html>

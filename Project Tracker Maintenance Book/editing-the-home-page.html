@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>6 Editing the Home Page | The Project Tracker</title>
+  <meta name="description" content="6 Editing the Home Page | The Project Tracker" />
+  <meta name="generator" content="bookdown 0.17 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="6 Editing the Home Page | The Project Tracker" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="6 Editing the Home Page | The Project Tracker" />
+  
+  
+  
+
+<meta name="author" content="Elizabeth Greenwood" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="shiny-help.html"/>
+<link rel="next" href="editing-the-overview-pages.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.9.1/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-1.49.4/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-1.49.4/plotly-latest.min.js"></script>
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="project-tracker-maintenance.html"><a href="project-tracker-maintenance.html"><i class="fa fa-check"></i><b>1</b> Project Tracker Maintenance</a></li>
+<li class="chapter" data-level="2" data-path="deployment.html"><a href="deployment.html"><i class="fa fa-check"></i><b>2</b> Deployment</a></li>
+<li class="chapter" data-level="3" data-path="file-structure.html"><a href="file-structure.html"><i class="fa fa-check"></i><b>3</b> File Structure</a><ul>
+<li class="chapter" data-level="3.1" data-path="file-structure.html"><a href="file-structure.html#input-folder"><i class="fa fa-check"></i><b>3.1</b> Input folder</a></li>
+<li class="chapter" data-level="3.2" data-path="file-structure.html"><a href="file-structure.html#app.r-file"><i class="fa fa-check"></i><b>3.2</b> App.R file</a></li>
+<li class="chapter" data-level="3.3" data-path="file-structure.html"><a href="file-structure.html#ui-folder"><i class="fa fa-check"></i><b>3.3</b> ui folder</a></li>
+<li class="chapter" data-level="3.4" data-path="file-structure.html"><a href="file-structure.html#server-folder"><i class="fa fa-check"></i><b>3.4</b> server folder</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="version-control.html"><a href="version-control.html"><i class="fa fa-check"></i><b>4</b> Version Control</a></li>
+<li class="chapter" data-level="5" data-path="shiny-help.html"><a href="shiny-help.html"><i class="fa fa-check"></i><b>5</b> Shiny Help</a><ul>
+<li class="chapter" data-level="5.1" data-path="shiny-help.html"><a href="shiny-help.html#reactivity"><i class="fa fa-check"></i><b>5.1</b> Reactivity</a></li>
+<li class="chapter" data-level="5.2" data-path="shiny-help.html"><a href="shiny-help.html#execution-of-commands"><i class="fa fa-check"></i><b>5.2</b> Execution of commands</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="editing-the-home-page.html"><a href="editing-the-home-page.html"><i class="fa fa-check"></i><b>6</b> Editing the Home Page</a><ul>
+<li class="chapter" data-level="6.1" data-path="editing-the-home-page.html"><a href="editing-the-home-page.html#setting-up-section"><i class="fa fa-check"></i><b>6.1</b> Setting up section</a></li>
+<li class="chapter" data-level="6.2" data-path="editing-the-home-page.html"><a href="editing-the-home-page.html#people-table-section"><i class="fa fa-check"></i><b>6.2</b> People Table Section</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="editing-the-home-page.html"><a href="editing-the-home-page.html#adding-a-person"><i class="fa fa-check"></i><b>6.2.1</b> Adding a person</a></li>
+<li class="chapter" data-level="6.2.2" data-path="editing-the-home-page.html"><a href="editing-the-home-page.html#editing-a-person"><i class="fa fa-check"></i><b>6.2.2</b> Editing a Person</a></li>
+<li class="chapter" data-level="6.2.3" data-path="editing-the-home-page.html"><a href="editing-the-home-page.html#removing-a-person"><i class="fa fa-check"></i><b>6.2.3</b> Removing a Person</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="editing-the-home-page.html"><a href="editing-the-home-page.html#project-table-section"><i class="fa fa-check"></i><b>6.3</b> Project Table Section</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="editing-the-home-page.html"><a href="editing-the-home-page.html#adding-a-project"><i class="fa fa-check"></i><b>6.3.1</b> Adding a Project</a></li>
+<li class="chapter" data-level="6.3.2" data-path="editing-the-home-page.html"><a href="editing-the-home-page.html#editing-a-project"><i class="fa fa-check"></i><b>6.3.2</b> Editing a Project</a></li>
+<li class="chapter" data-level="6.3.3" data-path="editing-the-home-page.html"><a href="editing-the-home-page.html#deleting-a-project"><i class="fa fa-check"></i><b>6.3.3</b> Deleting a Project</a></li>
+<li class="chapter" data-level="6.3.4" data-path="editing-the-home-page.html"><a href="editing-the-home-page.html#getting-a-projects-details"><i class="fa fa-check"></i><b>6.3.4</b> Getting a Project’s Details</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="editing-the-overview-pages.html"><a href="editing-the-overview-pages.html"><i class="fa fa-check"></i><b>7</b> Editing the Overview Pages</a><ul>
+<li class="chapter" data-level="7.1" data-path="editing-the-overview-pages.html"><a href="editing-the-overview-pages.html#team-overview"><i class="fa fa-check"></i><b>7.1</b> Team overview</a><ul>
+<li class="chapter" data-level="7.1.1" data-path="editing-the-overview-pages.html"><a href="editing-the-overview-pages.html#bar-chart-number-of-projects-each-team-member-currently-has"><i class="fa fa-check"></i><b>7.1.1</b> Bar chart: number of projects each team member currently has</a></li>
+<li class="chapter" data-level="7.1.2" data-path="editing-the-overview-pages.html"><a href="editing-the-overview-pages.html#pie-chart-no.-projects-at-each-rag-rating"><i class="fa fa-check"></i><b>7.1.2</b> Pie chart: No. Projects at each RAG rating</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="editing-the-overview-pages.html"><a href="editing-the-overview-pages.html#people-overview"><i class="fa fa-check"></i><b>7.2</b> People Overview</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">The Project Tracker</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="editing-the-home-page" class="section level1">
+<h1><span class="header-section-number">6</span> Editing the Home Page</h1>
+<p>Because the ui is very similar for all the pages I am gping to concentrate explaining the server side as this is the most complex section and if you need to make any changes to the home page the difficulty lies in this file.</p>
+<p>Within the <code>server/Home.R</code> file there are 3 sections:</p>
+<ul>
+<li>a setting up section</li>
+<li>People table section</li>
+<li>Project table section</li>
+</ul>
+<div id="setting-up-section" class="section level2">
+<h2><span class="header-section-number">6.1</span> Setting up section</h2>
+<p>This has four sub-sections:</p>
+<ul>
+<li>Functions for reading and creating the dataframes from the csv files</li>
+<li>Outputting the tables (team members table and the project table)</li>
+<li>Reactive data value that changes whenever a user click a confirm button which in turn changes the datasets and csv files, so that overview pages update whenever current user makes a change</li>
+<li>Functions for saving the newly changed dataframes to the csv files.</li>
+</ul>
+<p>There are 2 functions for reading the csv files and creating an R dataframe: one for the <code>People.csv</code>, <code>peopleData()</code> and one for <code>Projects.csv</code>, <code>projectData()</code>. These functions simply reads files named <code>Peaple.csv</code>and <code>Projects.csv</code> in the <code>datapathway</code> entered in the <code>App.R</code> file.</p>
+<p>The outputting of the tables is done using the function <code>renderDataTable()</code> from the package <code>DT</code>. <code>peopleData()</code> is called for the data within the table. This then needs to be filtered so that the boolean variable <code>CurrentlyInTeam</code> equals <code>TRUE</code> and then ensure you cannot see this column in the application by using <code>%&gt;% select (-CurrentlyInTeam)</code>. The reason for this variable will be explained later. The project table similarly uses the function <code>renderDataTable()</code> and calls <code>projectData()</code> for the data used in the data table. The columns <code>Comments</code> and <code>Documentation</code> are hidden from the table as they will be used when a user clicks the <code>details of project</code> button for the individual projects.</p>
+<p>The reactive data value that changes whenever a user clicks a confirm button is created using the following code:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">confirmingButtons &lt;-<span class="st"> </span><span class="kw">reactive</span>({
+  input<span class="op">$</span>ConfirmNewPerson <span class="op">+</span><span class="st"> </span>input<span class="op">$</span>ConfirmPerson <span class="op">+</span><span class="st"> </span>input<span class="op">$</span>ConfirmRemovalOfPerson <span class="op">+</span><span class="st"> </span>input<span class="op">$</span>ConfirmRemovalOfProject <span class="op">+</span><span class="st"> </span>input<span class="op">$</span>ConfirmProject <span class="op">+</span><span class="st"> </span>input<span class="op">$</span>ConfirmNewProject
+})</code></pre></div>
+<p>It simply adds all the inputs from the confirm button which change when they are clicked.</p>
+<p>The functions to save changes made to the people table and the project table are called <code>saveChangesToPeopleFile()</code> and <code>saveChangesToProjectFile()</code> respectively. They first check the file exists (which should always be true), removes the file and then writes immediately after the new dataframe to the csv file. Then the table corresponding to the function in re-outputted to represented the new csv file and then the appropriate function (<code>peopleData()</code> or <code>projectData()</code>) is called so the new peopleData is the updated csv file.</p>
+</div>
+<div id="people-table-section" class="section level2">
+<h2><span class="header-section-number">6.2</span> People Table Section</h2>
+<p>The People table section is where all the code for adding/deleting/editing the people data can be found. Therefore I will split up explaining the section using the following sub-section:</p>
+<ul>
+<li>Code to add a person</li>
+<li>code to edit a person’s details</li>
+<li>Code to remove a person from the team</li>
+</ul>
+<blockquote>
+<p>It is important to note that this is not the order in the code. In the code there is the ui for each f the forms for the 3 category then the code used to actually save the inputs given by the user. I am explaining it out of order as it makes more sense to explain it this way.</p>
+</blockquote>
+<div id="adding-a-person" class="section level3">
+<h3><span class="header-section-number">6.2.1</span> Adding a person</h3>
+<p>On the homepage there is a button saying “Add New Team Member”. This is created in the ui using the following code:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">actionButton</span>(<span class="st">&quot;addPerson&quot;</span>, <span class="st">&quot;Add New Team Member&quot;</span>) </code></pre></div>
+<p>When this button is clicked the variable where the input for this widget changes. This input varible is stored in the variable <code>input$addPerson</code> which you can see is the first parameter given in the actionButton function above. There is an <code>observerEvent</code> chunk of code which is triggered when the <code>input$addPerson</code> changes (when someone clicks this button). This uses the function <code>showModal</code> and <code>modalDialog</code> to produce a pop-upo window. Inside these functions widgets or html elements can be added to the pop-up window. Here the form asks for all the information which can be stored in the team members table (Name and Team).</p>
+<p>This relatively simple, however where things get a more complex is when sanitising the information that the user enters. This is where a user shouldn’t be able to add the same team member twice ot a person shouldn’t be bale to leave a persons name blank. The way the code deals with this is by using booleans (true or false variables) and conditional panels. Conditional panels are used to show error messages when a user has inputted a non-allowed value into any of the inputs. A conditional panel is also used to only show the confirm button of the form (to save the new person) if all information is allowed.</p>
+<blockquote>
+<p>In this application error messages are always placed within the function <code>h5()</code> as css has been added to make this red.</p>
+</blockquote>
+<p>Three booleans are used to sanitise the users input for adding a team member. They are as follows:</p>
+<ul>
+<li><code>newNameExists</code></li>
+<li><code>newNameHasBeenRemoved</code></li>
+<li><code>newTeamNameBlank</code></li>
+</ul>
+<p><code>newNameExists</code> checks the <code>Name</code> field in <code>peopleData</code> and if the name entered in the Name input field is already in the Name column it retruns true otherwise it returns false</p>
+<p><code>newNameHasBeenRemoved</code> is a bit more complex. If <code>newNameExists</code> is <code>TRUE</code> and the <code>CurrentlyInTeam</code> field is <code>FALSE</code> then <code>newNameHasBeenRemoved</code> is <code>TRUE</code>, otherwise it is <code>FALSE</code>.</p>
+<p><code>newTeamNameBlank</code> returns <code>TRUE</code> if the user hasn’t entered a value in the name input section otherwise returns <code>FALSE</code></p>
+<p>The error messages given are as follows:</p>
+<ul>
+<li>if <code>newNameExists</code> is true and <code>newNameasBeenRemoved</code>. The error message given is “Team member is already in list”</li>
+<li>if <code>newNameHasBeenRemoved</code> is true the error message given is “This Team Member was previously deleted, to reinstate them click confirm. Otherwise to avoid merging the 2 different team members’ projects together, please choose a different name”</li>
+<li>if <code>newTeamNameBlank</code> is true an error message pops up “Add a name!”</li>
+</ul>
+<p>The confirm button shows it the following things occur</p>
+<ul>
+<li>Either:
+<ul>
+<li><code>newNameExists</code> is false</li>
+<li>OR</li>
+<li><code>newNameExists</code> and <code>newNameHasBeenRemoved</code> are both true</li>
+</ul></li>
+<li><code>newTeamNameBlank</code> is false</li>
+</ul>
+<p>If a person correctly fills in the form and clicks confirm another chunk of code will be ran as the observerEvent was triggered when clicking the button. This is the code to add the team member to the <code>peopleData</code> dataframe in R and then the <code>saveChangesToPeopleFile()</code> function will be called (from the setting up section) to save the changes to the <code>People.csv</code> file.</p>
+<p>The chunk of code can be seen here:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">observeEvent</span>(input<span class="op">$</span>ConfirmNewPerson, {
+  <span class="cf">if</span>(<span class="op">!</span><span class="kw">newNameExists</span>()) {
+    peopleData &lt;-<span class="st"> </span><span class="kw">peopleData</span>() <span class="op">%&gt;%</span>
+<span class="st">      </span><span class="kw">rbind</span>(<span class="kw">data.frame</span>(<span class="dt">Name =</span> <span class="kw">c</span>(input<span class="op">$</span>addPersonForm), <span class="dt">Team=</span><span class="kw">c</span>(input<span class="op">$</span>addPersonForm2), <span class="dt">CurrentlyInTeam=</span><span class="kw">c</span>(<span class="st">&quot;TRUE&quot;</span>)))
+    <span class="co">#saves changes to csv file and re-renders table</span>
+  }
+  <span class="cf">else</span> { 
+    <span class="co"># if reinstating a team member deleting the original row and adding a new row where they are currently in the team</span>
+    peopleData &lt;-<span class="st"> </span><span class="kw">peopleData</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">      </span><span class="kw">filter</span>(<span class="kw">tolower</span>(Name)<span class="op">!=</span><span class="kw">tolower</span>(input<span class="op">$</span>addPersonForm)) <span class="op">%&gt;%</span>
+<span class="st">      </span><span class="kw">rbind</span>(<span class="kw">data.frame</span>(<span class="dt">Name =</span> <span class="kw">c</span>(input<span class="op">$</span>addPersonForm), <span class="dt">Team=</span><span class="kw">c</span>(input<span class="op">$</span>addPersonForm2), <span class="dt">CurrentlyInTeam=</span><span class="kw">c</span>(<span class="st">&quot;TRUE&quot;</span>)))
+  }
+  <span class="co">#reads data from csv file (peopleData() function), then attatches new person to table</span>
+  <span class="kw">saveChangesToPeopleFile</span>(peopleData)
+  <span class="kw">removeModal</span>()
+})</code></pre></div>
+<p>If the new name entered already exists (so the user is reinstating a previously removed user), the row with that name is deleted from the table and then a new row is created (using the <code>rbind</code> function with the team the user inputted and the <code>CurrentlyInVariable</code> is set to <code>TRUE</code>.</p>
+<p>Otherwise a dataframe is created with one row (the information the user inputted) and this is attached to the previous <code>peopleData</code></p>
+<p>The changes are then saved and the modal is removed from the screen to see the updated table with the new person in the table.</p>
+</div>
+<div id="editing-a-person" class="section level3">
+<h3><span class="header-section-number">6.2.2</span> Editing a Person</h3>
+<p>Similarly to adding a person, there is also a button for editing a team member which appears once a team member has been selected in the table. Clicking this button triggers a chunk of code to run producing a modal (pop-up window). This modal is populated with various input widgets for all the neccessary information all having the default value of what was originally in the table. It also uses booleans for detecting areas and sanitising the input, these are as follows:</p>
+<ul>
+<li><code>editedNameExists</code></li>
+<li><code>editedTeamNameBlank</code></li>
+</ul>
+<p>These do the same thing as the <code>newTeamName</code> and <code>newTeamNameBlank</code> booleabs from the adding a person section. The only difference is the <code>editedNameExists</code> boolean also allows the original name in the box (as that wouldn’t create any duplicates). This is so that a user can click the confirm button if they have changed the Team for instance but not the name.</p>
+<p>For the confirm button to appear the following statements need to be true:</p>
+<ul>
+<li><code>editedNameExists</code> is false</li>
+<li><code>editedTeamNameBlank</code> is false</li>
+</ul>
+<p>When the confirm button is clicked it makes changes to both the <code>People.csv</code> file and <code>Project.csv</code> file. firstly the current <code>peopleData</code> dataframe is filtered so that it only includes current team members. This is because the table that is outputted only shows current team members and to edit the correct person the row numbers of the people in the table need to be indetical to those where the edits are occuring. Once the <code>peopleData</code> has been filtered to only current team members, the row number of the selected person is used to edit their details in the table. T</p>
+<p>The variable the row number is stored in is <code>input$</code> + the name of the output of the table (<code>people</code>) + <code>_rows_selected</code>. In this instance <code>input$people_rows_selected</code>. This is used to insert the input values overwriting the previous ones using this:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  newPeopleData[input<span class="op">$</span>people_rows_selected, <span class="dv">1</span>] &lt;-<span class="st"> </span><span class="kw">as.character</span>(input<span class="op">$</span>editPersonForm)</code></pre></div>
+<p>After this the original <code>peopleData</code> is filtered to team members who are not currently in the team and this table is attached to the <code>newPeopleData</code> created above. Then if a person has changed their name, they need to be changed in the <code>TeamMembers</code> column of the project table, so the overview pages work as you would expect. This is done using the following code:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">projectData &lt;-<span class="st"> </span><span class="kw">projectData</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate_all</span>(as.character) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(
+    <span class="dt">TeamMembers =</span> <span class="kw">str_replace_all</span>(TeamMembers, <span class="kw">as.character</span>(<span class="kw">peopleData</span>()[input<span class="op">$</span>people_rows_selected, <span class="dv">1</span>]), input<span class="op">$</span>editPersonForm)
+  )</code></pre></div>
+<p>This replaces all of the original name (<code>peopleData()[input$people_rows_selected, 1]</code>) with the new name confirmed by the user (<code>input$editPersonsForm</code>) in every row of the project table.</p>
+</div>
+<div id="removing-a-person" class="section level3">
+<h3><span class="header-section-number">6.2.3</span> Removing a Person</h3>
+<p>When a row of the team members table is selected 2 buttons appear. One of those buttons is labelled with “Remove Team Member”. When clicked a pop-up window appears saying “Are you sure you want to remove this team member?” with a confirm button. The confirm button triggers the code that removes the team member from the <code>peopleData</code> table and the <code>People.csv</code> file.</p>
+<p>Fully removing a Team Member from <code>peopleData</code> causs many issues. This is because all team members listed in <code>projectData</code> needs to be in the <code>peopleData</code> before the application will save any additions/changes. This means that you would have to remove their name from the project details if you wanted to make any other change to the project details. This would be an issue as the record of who worked on the project will effectively be removed. To solve this issue the column <code>CurrentlyInTeam</code> was created in <code>peopleData</code> so that the application stores a record of everyone who was listed in the tracker at some point.</p>
+<p>This is done by completing the following steps:</p>
+<ol style="list-style-type: decimal">
+<li><code>newPeopleData</code> is created by filtering <code>peopleData</code> to all current team members (so that the input row given can be correctly matched to the team member the user wants to delete)</li>
+<li>Then <code>personToRemove</code> is produced by filtering <code>newPeopleData</code> by the name of the person in the row selected</li>
+<li>Rewrite the third column (<code>CurrentlyInTeam</code>) with <code>FALSE</code> in the newly creaed <code>personToRemove</code>. There now should only be one row in this table and it should be the row which the user selected</li>
+<li>Next filter the <code>newPeopleData</code> (from step 1) to not equal the row the user selected then use the <code>rbind</code> function to attach the following tables:
+<ul>
+<li><code>personToRemove</code></li>
+<li>Original <code>peopleData</code> filtered to team members who are not currently in the team</li>
+</ul></li>
+</ol>
+</div>
+</div>
+<div id="project-table-section" class="section level2">
+<h2><span class="header-section-number">6.3</span> Project Table Section</h2>
+<p>The project table section is where all the code for adding/deleting/editing/seeing the details the different projects can be found. Therefore I will split up explaining the section using the following sub-sections:</p>
+<ul>
+<li>Code to add a project</li>
+<li>code to edit a project’s details</li>
+<li>Code to remove a project from the team</li>
+<li>see the details of a project and add comments</li>
+</ul>
+<blockquote>
+<p>It is important to note (similarly to the people section) that this is not the order in the code. In the code there is the ui for each of the forms for the 4 categories then the code used to actually save the inputs given by the user. I am explaining it out of order as it makes more sense to explain it this way.</p>
+</blockquote>
+<div id="adding-a-project" class="section level3">
+<h3><span class="header-section-number">6.3.1</span> Adding a Project</h3>
+<p>When a user clicks the button to add a project this triggers a pop-up window to appear. This contains the form to add a project. Similarly to adding/editing a team members details, there needs to be some restrictions on what the user can enter into the data tables. This is done using different booleans similarly to adding/editing team members.</p>
+<p>Adding a project uses 3 booleans:</p>
+<ul>
+<li><code>newProjectNameExists</code></li>
+<li><code>newTeamMembersDoNotExist</code></li>
+<li><code>newProjectNameBlank</code></li>
+</ul>
+<p><code>newProjectNameExists</code> returns true if the name the user entered for the project exists in the <code>Name</code> field of the <code>projectData</code> and false otherwise</p>
+<p><code>newTeamMembersDoNotExist</code> returns true if all the team members listed in the input are in the <code>Name</code> column from <code>peopleData</code>. This is done by counting the number of team members entered by the user that are not in the <code>peopleData</code> table. If this number is 0 or the input is empty (a project can be created without having any team members currently working on it) it returns true.</p>
+<p>The way this is calculated is by the following line of code:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="op">!</span>(((<span class="kw">length</span>(<span class="kw">unlist</span>(<span class="kw">str_split</span>(input<span class="op">$</span>addProjectForm2, <span class="st">&quot;, &quot;</span>))[<span class="op">!</span>(<span class="kw">unlist</span>(<span class="kw">str_split</span>(input<span class="op">$</span>addProjectForm2, <span class="st">&quot;, &quot;</span>)) <span class="op">%in%</span><span class="st"> </span><span class="kw">peopleData</span>()<span class="op">$</span>Name)]) <span class="op">==</span><span class="st"> </span><span class="dv">0</span>))<span class="op">||</span>(input<span class="op">$</span>addProjectForm2<span class="op">==</span><span class="st">&quot;&quot;</span>))</code></pre></div>
+<p><code>newProjectNameBlank</code> returns true if the user hasn’t entered anything into the text input box for the name and false if otherwise.</p>
+<p>The error messages that will appear because of these booleans can be seen below:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Boolean</th>
+<th align="left">Error.Message</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><code>newProjectNameExists</code></td>
+<td align="left">This name is already taken, please choose another one</td>
+</tr>
+<tr class="even">
+<td align="left"><code>newTeamMembersDoNotExist</code></td>
+<td align="left">Team member(s) listed above does not exist, please try again</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>newProjectNameBlank</code></td>
+<td align="left">Add a name!</td>
+</tr>
+</tbody>
+</table>
+<p>The confirm button is only shown when none of the above booleans are true.</p>
+<p>When a user has entered all relevant information and has clicked confirm the code to add the project is triggered. This code is very simple. It produces a dataframe with all the same headers as <code>projectData</code> with all the information the user has just entered. This dataframe is then attached to the original <code>projectData</code> using <code>rbind</code>. This s then saved to <code>Projects.csv</code> and re-outputted in the application using the functions in the setting up section.</p>
+</div>
+<div id="editing-a-project" class="section level3">
+<h3><span class="header-section-number">6.3.2</span> Editing a Project</h3>
+<p>When a user selects a row in the project table 3 buttons appear to the right of the table to do the following things:</p>
+<ul>
+<li>edit projects</li>
+<li>remove projects</li>
+<li>see the details of project</li>
+</ul>
+<p>When the user clicks this button a pop-up window.The pop-up window appears as there is an <code>observeEvent</code> that uses the button as its a parameter and then uses the <code>showModal</code> and<code>modalDialog</code> functions this includes several different widgets for entering the <code>Name</code>, <code>TeamMembers</code>, <code>Customer</code> fields etc. The inputs are controlled by multiple booleans like in the previous sections:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Boolean</th>
+<th align="left">Calculation</th>
+<th align="left">Error.Message</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><code>editedProjectNameExists</code></td>
+<td align="left">This returns true if the new name is in <code>projectData</code> already unless it is the row which is selected. This is done using this line of code: <code>tolower(input$editProjectForm) %in% tolower(projectData()[-input$project_rows_selected,]$Name)</code></td>
+<td align="left">This name is already taken, please choose another one</td>
+</tr>
+<tr class="even">
+<td align="left"><code>editedProjectTeamMembersDoNotExist</code></td>
+<td align="left">This is the same calculation as <code>newTeamMembersDoNotExist</code> but use the correct input (<code>input$editProjectForm2</code> instead of <code>input$addProjectForm2</code>)</td>
+<td align="left">Team member(s) listed above does not exist, please try again.</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>editedProjectNameBlank</code></td>
+<td align="left">This returns true if <code>input$editProjectForm</code> equals ’’</td>
+<td align="left">Add a name!</td>
+</tr>
+</tbody>
+</table>
+<p>The confirm button appears when all the above booleans are false using a <code>conditionalPanel</code>. When the user clicks confirm this triggers the block of code to run to edit a project’s details in <code>peopleData</code> and in <code>Projects.csv</code>. This is font by using the rownumber of the selected row and overwriting all the information with the new user input. As the user inputs have a default value of the previous values if no changes are made the information in overwritten with the same information that was in the table previously</p>
+</div>
+<div id="deleting-a-project" class="section level3">
+<h3><span class="header-section-number">6.3.3</span> Deleting a Project</h3>
+<p>As mentioned above when a user selects a row 3 buttons appear. If the user clicks the button to delete a project a pop up window will appear asking them to confirm. When clicked the chunk of code gets run to delete the projects by removing the row selected from the orginal <code>projectData</code> and saving the changes using the functions explained in the setting up section.</p>
+</div>
+<div id="getting-a-projects-details" class="section level3">
+<h3><span class="header-section-number">6.3.4</span> Getting a Project’s Details</h3>
+<p>As mentioned above when a user selects a row 3 buttons appear one to see the details. This causes a pop-up window to appear showing all the details of the selected project in a more readable format. In this window users can add comments and see comments previously made. These comments are stored in a column of <code>projectData</code> that are not outputted in the project table in the application.</p>
+<p>First all the data needed for the information is collected. This includes the following data sets:</p>
+<ul>
+<li>updates <code>projectData</code></li>
+<li><code>teamMembers</code> using the <code>TeamMembers</code> field of <code>projectData</code> - only has one column <code>team_members</code></li>
+<li><code>comments</code> using the <code>comments</code> field of <code>projectData</code> - only has one column <code>Comments</code></li>
+</ul>
+<p>The above datasets are used to create some shiny outputs (outputs to put in modal which require ui tags e.g. <code>li()</code> meaning list item):</p>
+<ul>
+<li><code>projectComments</code></li>
+<li><code>list</code> which is a list of team members</li>
+</ul>
+<p>Some vectors/values are also created to use in the modal. They are as follows:</p>
+<ul>
+<li><code>documentationText</code> - a vector containing 2 strings: the first being the text to output to the application, the second being CSS code to determine the style of the text outputted (colour/bold)</li>
+<li><code>daysToDeadline</code> calculates the amount of days to the deadline</li>
+<li><code>deadlineText</code> - a vector containing 2 strings: the first being the text to output to the application, the second being CSS code to determine the style of the text outputted (colour/bold)</li>
+</ul>
+<p>As well as the above one boolean is uesd for a conditional panel: <code>noDocumentation</code>. If a link has not been supplied to a projects documentation in the project details pop-up window it will say “No link to the documentation for this project has been given” otherwise a hyperlink will be created to the documentation which reads “Click here!”</p>
+<p>Below is a screenshot of the project details section for a project</p>
+<p><img src="project_details_example.png" width="70%" /></p>
+<ul>
+<li><p>The bullet pointed list of team members is produced using the following lines of code:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  output<span class="op">$</span>list &lt;-<span class="st"> </span><span class="kw">renderUI</span>({
+    <span class="kw">apply</span>(teamMembers, <span class="dv">1</span>, <span class="cf">function</span>(x) tags<span class="op">$</span><span class="kw">li</span>(x[<span class="st">&#39;team_members&#39;</span>]))
+  })</code></pre></div>
+the output <code>list</code> is then rendered from within the modal functions</li>
+<li><p>The customer information is then filled in by directly referencing the <code>projectData</code>. The following line of code does this (within the <code>modalDialog</code>):</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">p</span>(<span class="kw">span</span>(<span class="st">&quot;Customer: &quot;</span>, <span class="dt">style=</span><span class="st">&quot;font-weight:bold&quot;</span>), projectData[input<span class="op">$</span>project_rows_selected,<span class="dv">3</span>]),</code></pre></div></li>
+<li><p>The different outputs from <code>documentationText</code> can be seen below:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">If.true…</th>
+<th align="left">Text.Output</th>
+<th align="left">Text.Style</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">fields <code>ProjectBrief</code> and <code>QALog</code> are both true in the selected row</td>
+<td align="left">This project bas both a project brief and a QA log</td>
+<td align="left">’’ (just normal text)</td>
+</tr>
+<tr class="even">
+<td align="left">if neither of the fields <code>ProjectBrief</code> and <code>QALog</code> in the selected row are true</td>
+<td align="left">This project currently has NO documentation associated with it</td>
+<td align="left">color: red; font-weight: bold</td>
+</tr>
+<tr class="odd">
+<td align="left">The <code>ProjectBrief</code> field is true in the selected row but the <code>QALog</code> field is false</td>
+<td align="left">This project currently has a project brief but no QA log</td>
+<td align="left">color: red</td>
+</tr>
+<tr class="even">
+<td align="left">The <code>QALog</code> field is true in the selected row but the <code>ProjectBrief</code> field is false</td>
+<td align="left">This project has a QA log but no project brief</td>
+<td align="left">color: red</td>
+</tr>
+</tbody>
+</table></li>
+<li><p>The <code>DaysToDeadline</code> calculates the number of work days till the deadline, if the deadline has passed gives a negative number. The code to do this can be seen below:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  daysToDeadline &lt;-<span class="st"> </span>
+<span class="cf">if</span>(<span class="kw">as.Date</span>(projectData[input<span class="op">$</span>project_rows_selected,<span class="dv">6</span>], <span class="st">&quot;%d/%m/%Y&quot;</span>) <span class="op">&lt;</span><span class="st"> </span><span class="kw">Sys.Date</span>()){ 
+  <span class="op">-</span><span class="kw">sum</span>(<span class="op">!</span><span class="kw">weekdays</span>(<span class="kw">seq</span>(<span class="kw">as.Date</span>(projectData[input<span class="op">$</span>project_rows_selected,<span class="dv">6</span>], <span class="st">&quot;%d/%m/%Y&quot;</span>), <span class="kw">Sys.Date</span>(), <span class="st">&quot;days&quot;</span>)) <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Saturday&quot;</span>, <span class="st">&quot;Sunday&quot;</span>))
+} <span class="cf">else</span> {
+  <span class="kw">sum</span>(<span class="op">!</span><span class="kw">weekdays</span>(<span class="kw">seq</span>(<span class="kw">Sys.Date</span>(), <span class="kw">as.Date</span>(projectData[input<span class="op">$</span>project_rows_selected,<span class="dv">6</span>], <span class="st">&quot;%d/%m/%Y&quot;</span>), <span class="st">&quot;days&quot;</span>)) <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Saturday&quot;</span>, <span class="st">&quot;Sunday&quot;</span>))
+}</code></pre></div>
+<p>The different outputs from <code>deadlineText</code> are as follows:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">If.true…</th>
+<th align="left">Text.Output</th>
+<th align="left">Text.Style</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">The deadline for the seleted project is today’s date</td>
+<td align="left">The project is due today!</td>
+<td align="left">color: red</td>
+</tr>
+<tr class="even">
+<td align="left">If number of days till the deadline is negative (already passed)</td>
+<td align="left">This project is [<code>daysToDeadline</code>] working days overdue!</td>
+<td align="left">color: red</td>
+</tr>
+<tr class="odd">
+<td align="left">If the deadline is in the future</td>
+<td align="left">There are [<code>daysToDeadline</code>] days till the deadline for this project</td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table></li>
+</ul>
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="shiny-help.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="editing-the-overview-pages.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+},
+"search": false
+});
+});
+</script>
+
+</body>
+
+</html>

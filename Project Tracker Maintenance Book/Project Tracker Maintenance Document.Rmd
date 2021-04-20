@@ -1,0 +1,681 @@
+---
+title: "The Project Tracker"
+author: "Elizabeth Greenwood"
+output:
+  bookdown::gitbook
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Project Tracker Maintenance
+
+The project tracker was designed to track the projects of all the people in the team with the aim to help you plan appropriately for the capacity of the team, and give enough room to complete high quality projects in a timely manner. 
+
+Made in R shiny, the R Shiny tracker allows you to add team members to a specific team and then add projects that those team members are associated too. Everyone has the same access to everything as everyone else so team members can update the information about their own projects. 
+
+For each projects a handful of standard information is asked for. The information asked for is as follows:
+
+* Project Name
+* Team members involved in the project
+* The customer
+* Whether the project has a QA Log and project brief
+* The date of the deadline of the project
+* A Rag rating of the project
+* a link to where the project documentation is stored
+* and a checkbox to click once the project has been completed
+
+Using this information the tracker has 2 summary pages currently: Team Overview and Person Overview. Team Overview to allow you to select a team from a drop down box and see visualisations of the projects where only projects that team members of the selected team are shown. Similarly the person overview allows you to pick a person afrom a drop down box and see a table of only the projects theyt are involved with.
+
+The project tracker has a working version which is deployed locally where data files are stored in teams. The set up guide to use the working project tracker is [here](https://educationgovuk.sharepoint.com/sites/StrategicFinancialAnalysis2/Shared%20Documents/Forms/AllItems.aspx?id=%2Fsites%2FStrategicFinancialAnalysis2%2FShared%20Documents%2FGeneral%2FProject%20Tracker%2FProject%2DTracker%2DSet%2Dup%2Ehtml&parent=%2Fsites%2FStrategicFinancialAnalysis2%2FShared%20Documents%2FGeneral%2FProject%20Tracker)
+
+The project tracker is version controlled usinng Azure DeVops. This will be discussed later in further detail but if you would like to clone the repository you can find the link [here](https://dfe-gov-uk.visualstudio.com/Strategic%20Financial%20Analysis/_git/Project%20Tracker) by clicking the clone button.
+
+The documentation for the project tracker which is where any isues, risks and improvements are logged as well as the QA Log and project brief can be found [here](https://educationgovuk.sharepoint.com/sites/StrategicFinancialAnalysis2/_layouts/15/Doc.aspx?sourcedoc=%7B13E50B1D-586F-4A5D-BB1D-6C3DB91E37BE%7D&file=Project%20Tracker%20Documentation.xlsx&action=default&mobileredirect=true&CT=1584021021789&OR=ItemsView) 
+
+# Deployment
+
+The current solution is to deploy locally. This option was chosen for multiple reasons. Deploying to RS Connect required a lot more steps and since MIAU currently only has under 10 people this seemed uneccessary.
+
+Below are just some of the steps which would need to be taken if it was decided that the application should be deployed to RS Connect:
+
+* App needs to be version controlled using git
+* App needs to be managed using Visual Studio Team Services (VSTS)
+* Dependencies would ideally be managed by `pakrat`/`renv` to ensure that the deployed versions of packages match those that are using locally
+*  Would need it's own database and database minder
+* App must take less than 1 minute to load
+
+To avoid all these extra steps it was decided that the app would deploy locally. This is where all individual team members run the app on their device and make changes to the data files (`Projects.csv` and `People.csv`) which are stored in a shared area. For this to work the area needs to be synced to your device. The project tracker set-up guide explains how to do this. On top of this the set up guide also has instructions for how you can create a bashfile which you can click and the project tracker opens without you having to open R Studio and run the file. The link to the set-up guide is [here](https://educationgovuk.sharepoint.com/sites/StrategicFinancialAnalysis2/Shared%20Documents/Forms/AllItems.aspx?id=%2Fsites%2FStrategicFinancialAnalysis2%2FShared%20Documents%2FGeneral%2FProject%20Tracker%2FProject%2DTracker%2DSet%2Dup%2Ehtml&parent=%2Fsites%2FStrategicFinancialAnalysis2%2FShared%20Documents%2FGeneral%2FProject%20Tracker).
+
+If in the future the project tracker needed to be deployed to a server then a good source of information is the MS Team: R Shiny Developers. The team can be found [here](https://teams.microsoft.com/l/team/19%3a311ec2e4d46b4dd38f0d61f05fb93383%40thread.skype/conversations?groupId=b95c605d-8fbc-4e4d-9a76-2f7d1c55e70a&tenantId=fad277c9-c60a-4da1-b5f3-b3b8b34a82f9).
+
+# File Structure
+There are 3 main directories required for the project tracker and one file on its own. They are as follows:
+
+* Inputs
+* server
+* ui
+* App.r
+
+The Input folder must be accessible to all members of the team and they must be able to write to and delete the files within the Inputs folder from within R. As everyone runs the code from their own device, to make running the tracker from R the easiest possible all files are kept within the SOAD sharepoint site. This is the sharepoint library which you will have synced to your area when setting up the project tracker. 
+
+Having the files stored in SharePoint makes it easier as each team member only needs to have one file for the project tracker saved in their personal area and this file will only need updating if there are more pages added to the application. Otherwise updating the app will be seamless.
+
+## Input folder
+
+The input folder has all the data rewuired for the application to run and where the information taht people enter into the application is stored. Currently there are 2 data files: `peopleData.csv` and `projectData.csv`.
+
+`peopleData.csv` has the following fields:
+
+* `Name`
+* `Team`
+* `CurrentlyInTeam`
+
+`CurrentlyInTeam` isn't displayed anywhere within the tracker. This is do that when a person is 'removed' there still exists a record of what projects they worked on
+
+
+`projectData.csv` has the following fields
+
+* `Name`
+* `TeamMember`
+* `Customer`
+* `ProjectBrief`
+* `QALog`
+* `Deadline`
+* `RAG`
+* `Completed`
+* `Comments`
+* `Documentation`
+
+`Comments` and `Documentaion` cannot be seen in the project table on the home page of the application, but if you click the details of project button (after selecting a project), the `Comments` field is split by a semi-colon delimeter and made into bullet points so it is easy to read and if there is a link entered in for the `Documentation` field there will be a hyperlink saying 'Click here!' which will follow the link entered.
+
+## App.R file
+
+All the code for the entire app could be held in the same file, this file - `App.r`. The problem with this is that it will create a very long file type as the `Home.R` file in the server folder on its own has 450< lines of code. This makes the code un-readable and hard to understand. therefore this file links to other files in neat sections making the application easier to edit. 
+
+This also makes it easier to update as these can be edited wthout having the rest of the team having to do anythin (like re-download the `App.R` file and enter their username in again).
+
+`App.R` has three components:
+
+- user interface object
+- server function-
+- call to the shinyApp function
+- Version control
+
+The user interface (ui) object controls the layout and appearance of your app. The server function contains the instructions that your computer needs to build your app and the shinyApp function creates Shiny app objects from an explicit UI/server pair. 
+
+As you can probably guess the ui folder contains code for the user interface amd the server folder contains instructions. In each of the folders there are 3 files with the exact same name in both folders:
+
+* `Home.R`
+* `PersonOverview.R`
+* `TeamOverview.R`
+
+These names correspond to the different pages of the application. 
+
+## ui folder
+
+The tracker uses navbarPage so that there can be multiple pages connected via a navbar. If this was not neccessary fluidPage could have been used. Each file contains a `tabPanel()` with all the code wrapped around by this `tabPanel`. This is how the computer knows what is meant to go on each page of the application.
+
+Elements like `titlePanel` and `sidebarLayout` create a basic layout for a Shiny app, but more advanced layouts can be created. `fluidRow` and `column` can be used to build a layout up from a grid system. This is what is used in the prokect tracker. These can be described as `panel` funcitons. 
+
+You can add content to your Shiny app by placing it inside a `Panel` function, for example just adding a character string. To add more advanced content you can use Shiny's HTML tag functions. These functions parallel common HTML5 tags. Below you can see a few of them
+
+```{r, echo=FALSE, results='asis'}
+x<-data.frame(`shiny function` = c("`p`","`h1`","`h2`","`h3`","`h4`","`h5`","`h6`","`a`","`br`","`div`","`span`","`pre`","`code`","`img`","`strong`","`em`","`HTML`"),
+              `HTML5 equivalent` = c("`<p>`","`<h1>`","`<h2>`","`<h3>`","`<h4>`","`<h5>`","`<h6>`","`<a>`","`<br>`","`<div>`","`<span>`","`<pre>`","`<code>`","`<img>`","`<strong>`","`<em>`", ""),
+              Creates = c("A paragraph of text",
+                          "A first level header",
+                          "A second level header",
+                          "A third level header",
+                          "A fourth level header",
+                          "A fifth level header",
+                          "A sixth level header",
+                          "A hyper link",
+                          "A line break (e.g. a blank line)",
+                          "A division of text with a uniform style",
+                          "An in-line division of text with a uniform style",
+                          "Text ‘as is’ in a fixed width font",
+                          "A formatted block of code",
+                          "An image",
+                          "Bold text",
+                          "Italicized text",
+                          "Directly passes a character string as HTML code"
+      ))
+
+knitr::kable(x)          
+
+```
+
+If you would like to understand this more, a tutorial can be found [here](https://www.w3schools.com/html/html_intro.asp). With the above information you should be able to understand what everything within the code id doing, but to understand how to change how elements are arranged it would be worth understanding a bit more about `HTML` and `CSS`. Currently the `CSS` being used was
+
+The one thing which is quite important when maintaining/updating the ui section of the application is understanding the importance of indenting. Indenting the code makes it much easier to read and understand how the ui works. This is because there is a lot of nested elements. Many errors can be caused by mis-matched brackets or missing commas and these take time to find when the code IS properly indented - when it is not indented this could take HOURS!
+
+## server folder
+
+The server folder is where all the code goes which is similar to the code you will have written if you have ever used R in any capacity. The only difference between this R code and code you have previously written is to do with reactivity and using inputs from the user to enter data and filter data accordingly. Reactivity is decribed in much greater detail later on - section 5 focusses on help with using Shiny!
+
+# Version Control
+
+As previously mentioned the files for the tracker are stored in the SOAD generall section of SharePoint. This is so the app can be used by the whole team by running locally rather deploying to RS Connect. These files are the working files of the tracker.
+
+There is an Azure DevOps repository where all the files can be found and worked on whilst the original files lie in the teams area. The repository can be found [here](https://dfe-gov-uk.visualstudio.com/Strategic%20Financial%20Analysis/_git/Project%20Tracker). 
+
+If you do not have access to this area follor this [guide](). Within this guide there are links to more tutoraials on version control and using git.
+
+# Shiny Help
+
+In this section there is an overview of how Shiny works with some useful links to understanding it more! 
+
+It is a very basic introduction so don't expect to totally understand Shiny after reading this
+
+## Reactivity
+
+The reactive elements in Shiny are the only reason why Shiny exists. This is a very important aspect of R Shiny. This section explains very basically how reactivity works within Shiny. For more information look at working through a shiny tutorial. Click [here](https://shiny.rstudio.com/tutorial/) to find an online tutorial which is very useful (the written tutorial from this guide was used when writing the rest of this section)
+
+Shiny provides a family of functions that turn R objects into outputs for the interface of the application e.g. tables or graphs. Each function creates a specific type of output, here are some examples:
+
+```{r echo=FALSE, results='asis'}
+
+x <- data.frame(`Output function` = c("`dataTableOutput`", "`htmlOutput`", "`imageOutput`", "`plotOutput`", "`tableOutput`", "`textOutput`", "`uiOutput`", "`verbatimTextOutput`"),
+                Creates = c("Data Table", "raw HTML", "image", "plot", "table", "text", "raw HTML", "text"))
+
+knitr::kable(x)
+
+```
+
+In order to output an R object you need to provide the R code to build the object. Placing a function in `ui` tells Shiny where to display your object, but you need to tell Shiny how to build the object. The code you need to provide the code to build the R function within the server function. The server function plays an important role in the Shiny process; it builds a list-like object that contains all of the code needed to update the R objects in your app. 
+
+Each R object needs to have its own entry in the list. You can create an entry by defining a new element for output within the server function, using a redner function. The element name should match thename of the reactive element that you created in the `ui`. A list of some of the possible render functions can be seen below:
+
+```{r echo=FALSE, results='asis'}
+
+x <- data.frame(`Render function` = c("`renderDataTable`","`renderImage`", "`renderPlot`", "`renderPrint`", "`renderTable`", "`renderText`", "renderUI"),
+                creats=c("Data Table", "images (saved as a link to a source file)", "plots", "any printed output", "data frame, matrix, other table like structures", "character strings", "a Shiny tag object or HTML"))
+
+knitr::kable(x)
+
+```
+
+Each render function takes a single argument: an R expression surrounded by braces, {}. The expression can be one simple line of text, or it can involve many lines of code, as if it were a complicated function call.
+
+Think of this R expression as a set of instructions that you give Shiny to store for later. Shiny will run the instructions when you first launch your app, and then Shiny will re-run the instructions every time it needs to update your object.
+
+Below is an example of what the code for simple app looks like:
+
+```{r eval=FALSE}
+library(shiny)
+
+ui <- fluidPage(
+  titlePanel("censusVis"),
+  sidebarLayout(
+    sidebarPanel(
+      helpText("Create demographic maps with 
+               information from the 2010 US Census."),
+      selectInput("var", 
+                  label = "Choose a variable to display",
+                  choices = c("Percent White", 
+                              "Percent Black",
+                              "Percent Hispanic", 
+                              "Percent Asian"),
+                  selected = "Percent White")
+    ),
+    mainPanel(
+      textOutput("selected_var")
+    )
+  )
+)
+
+server <- function(input, output) {
+  # rendering the output 'selected_var' in the mainPanel of the ui
+  output$selected_var <- renderText({ 
+    paste("You have selected", input$var) # input from the select input in the ui named 'var'
+  })
+}
+
+shinyApp(ui, server)
+
+```
+
+## Execution of commands
+
+Shiny will execute all of the commands you place within the `app.R` file. However, where the commands are placed determine how many times they are run (or re-run), which will in turn affect the performance of your app, since Shiny will run some sections your app.R script more often than others.
+
+Shiny saves the server function until a new user arrives. Each time a new user visits your app, Shiny runs the server function again, one time. The function helps Shiny build a distinct set of reactive objects for each user (as currently the app is run locally this is not relevant to the tracker).
+
+As users interact with the widgets and change their values, Shiny will re-run the R expressions assigned to each reactive object that depend on a widget whose value was changed. If your user is very active, these expressions may be re-run many, many times a second.
+
+Simply,
+
+* The shinyApp function is run once, when you launch your app
+* The server function is run once each time a user visits your app (not relevant to the tracker as it is being ran locally)
+* The R expressions inside render* functions are run many times. Shiny runs them once each time a user change the value of a widget.
+
+> You should generally avoid placing code inside a render function that does not need to be there. Doing so will slow down the entire app.
+
+# Editing the Home Page
+
+Because the ui is very similar for all the pages I am gping to concentrate explaining the server side as this is the most complex section and if you need to make any changes to the home page the difficulty lies in this file.
+
+Within the `server/Home.R` file there are 3 sections:
+
+* a setting up section
+* People table section
+* Project table section
+
+## Setting up section
+
+This has four sub-sections:
+
+* Functions for reading and creating the dataframes from the csv files
+* Outputting the tables (team members table and the project table)
+* Reactive data value that changes whenever a user click a confirm button which in turn changes the datasets and csv files, so that overview pages update whenever current user makes a change
+* Functions for saving the newly changed dataframes to the csv files.
+
+There are 2 functions for reading the csv files and creating an R dataframe: one for the `People.csv`, `peopleData()` and one for `Projects.csv`, `projectData()`. These functions simply reads files named `Peaple.csv`and `Projects.csv` in the `datapathway` entered in the `App.R` file. 
+
+The outputting of the tables is done using the function `renderDataTable()` from the package `DT`. `peopleData()` is called for the data within the table. This then needs to be filtered so that the boolean variable `CurrentlyInTeam` equals `TRUE` and then ensure you cannot see this column in the application by using `%>% select (-CurrentlyInTeam)`. The reason for this variable will be explained later. The project table similarly uses the function `renderDataTable()` and calls `projectData()` for the data used in the data table. The columns `Comments` and `Documentation` are hidden from the table as they will be used when a user clicks the `details of project` button for the individual projects.
+
+The reactive data value that changes whenever a user clicks a confirm button is created using the following code:
+```{r eval=FALSE}
+confirmingButtons <- reactive({
+  input$ConfirmNewPerson + input$ConfirmPerson + input$ConfirmRemovalOfPerson + input$ConfirmRemovalOfProject + input$ConfirmProject + input$ConfirmNewProject
+})
+
+```
+It simply adds all the inputs from the confirm button which change when they are clicked.
+
+The functions to save changes made to the people table and the project table are called `saveChangesToPeopleFile()` and `saveChangesToProjectFile()` respectively. They first check the file exists (which should always be true), removes the file and then writes immediately after the new dataframe to the csv file. Then the table corresponding to the function in re-outputted to represented the new csv file and then the appropriate function (`peopleData()` or `projectData()`) is called so the new peopleData is the updated csv file.
+
+## People Table Section
+
+The People table section is where all the code for adding/deleting/editing the people data can be found. Therefore I will split up explaining the section using the following sub-section:
+
+* Code to add a person
+* code to edit a person's details
+* Code to remove a person from the team
+
+> It is important to note that this is not the order in the code. In the code there is the ui for each f the forms for the 3 category then the code used to actually save the inputs given by the user. I am explaining it out of order as it makes more sense to explain it this way.
+
+### Adding a person
+
+On the homepage there is a button saying "Add New Team Member". This is created in the ui using the following code:
+
+```{r eval=FALSE}
+actionButton("addPerson", "Add New Team Member") 
+
+```
+
+When this button is clicked the variable where the input for this widget changes. This input varible is stored in the variable `input$addPerson` which you can see is the first parameter given in the actionButton function above. There is an `observerEvent` chunk of code which is triggered when the `input$addPerson` changes (when someone clicks this button). This uses the function `showModal` and `modalDialog` to produce a pop-upo window. Inside these functions widgets or html elements can be added to the pop-up window. Here the form asks for all the information which can be stored in the team members table (Name and Team). 
+
+This relatively simple, however where things get a more complex is when sanitising the information that the user enters. This is where a user shouldn't be able to add the same team member twice ot a person shouldn't be bale to leave a persons name blank. The way the code deals with this is by using booleans (true or false variables) and conditional panels. Conditional panels are used to show error messages when a user has inputted a non-allowed value into any of the inputs. A conditional panel is also used to only show the confirm button of the form (to save the new person) if all information is allowed.
+
+> In this application error messages are always placed within the function `h5()` as css has been added to make this red. 
+
+Three booleans are used to sanitise the users input for adding a team member. They are as follows:
+
+* `newNameExists`
+* `newNameHasBeenRemoved`
+* `newTeamNameBlank`
+
+`newNameExists` checks the `Name` field in `peopleData` and if the name entered in the Name input field is already in the Name column it retruns true otherwise it returns false
+
+`newNameHasBeenRemoved` is a bit more complex. If `newNameExists` is `TRUE` and the `CurrentlyInTeam` field is `FALSE` then `newNameHasBeenRemoved` is `TRUE`, otherwise it is `FALSE`.
+
+`newTeamNameBlank` returns `TRUE` if the user hasn't entered a value in the name input section otherwise returns `FALSE`
+
+The error messages given are as follows:
+
+* if `newNameExists` is true and `newNameasBeenRemoved`. The error message given is "Team member is already in list"
+* if `newNameHasBeenRemoved` is true the error message given is "This Team Member was previously deleted, to reinstate them click confirm. Otherwise to avoid merging the 2 different team members' projects together, please choose a different name"
+* if `newTeamNameBlank` is true an error message pops up "Add a name!"
+
+The confirm button shows it the following things occur
+
+* Either: 
+    + `newNameExists` is false 
+    + OR 
+    + `newNameExists` and `newNameHasBeenRemoved` are both true
+* `newTeamNameBlank` is false
+
+If a person correctly fills in the form and clicks confirm another chunk of code will be ran as the observerEvent was triggered when clicking the button. This is the code to add the team member to the `peopleData` dataframe in R and then the `saveChangesToPeopleFile()` function will be called (from the setting up section) to save the changes to the `People.csv` file.
+
+The chunk of code can be seen here:
+```{r eval=FALSE}
+observeEvent(input$ConfirmNewPerson, {
+  if(!newNameExists()) {
+    peopleData <- peopleData() %>%
+      rbind(data.frame(Name = c(input$addPersonForm), Team=c(input$addPersonForm2), CurrentlyInTeam=c("TRUE")))
+    #saves changes to csv file and re-renders table
+  }
+  else { 
+    # if reinstating a team member deleting the original row and adding a new row where they are currently in the team
+    peopleData <- peopleData() %>% 
+      filter(tolower(Name)!=tolower(input$addPersonForm)) %>%
+      rbind(data.frame(Name = c(input$addPersonForm), Team=c(input$addPersonForm2), CurrentlyInTeam=c("TRUE")))
+  }
+  #reads data from csv file (peopleData() function), then attatches new person to table
+  saveChangesToPeopleFile(peopleData)
+  removeModal()
+})
+
+```
+If the new name entered already exists (so the user is reinstating a previously removed user), the row with that name is deleted from the table and then a new row is created (using the `rbind` function with the team the user inputted and the `CurrentlyInVariable` is set to `TRUE`.
+
+Otherwise a dataframe is created with one row (the information the user inputted) and this is attached to the previous `peopleData` 
+
+The changes are then saved and the modal is removed from the screen to see the updated table with the new person in the table.
+
+### Editing a Person
+
+Similarly to adding a person, there is also a button for editing a team member which appears once a team member has been selected in the table. Clicking this button triggers a chunk of code to run producing a modal (pop-up window). This modal is populated with various input widgets for all the neccessary information all having the default value of what was originally in the table. It also uses booleans for detecting areas and sanitising the input, these are as follows:
+
+* `editedNameExists`
+* `editedTeamNameBlank`
+
+These do the same thing as the `newTeamName` and `newTeamNameBlank` booleabs from the adding a person section. The only difference is the `editedNameExists` boolean also allows the original name in the box (as that wouldn't create any duplicates). This is so that a user can click the confirm button if they have changed the Team for instance but not the name. 
+
+For the confirm button to appear the following statements need to be true:
+
+* `editedNameExists` is false
+* `editedTeamNameBlank` is false
+
+When the confirm button is clicked it makes changes to both the `People.csv` file and `Project.csv` file.
+firstly the current `peopleData` dataframe is filtered so that it only includes current team members. This is because the table that is outputted only shows current team members and to edit the correct person the row numbers of the people in the table need to be indetical to those where the edits are occuring. Once the `peopleData` has been filtered to only current team members, the row number of the selected person is used to edit their details in the table. T
+
+The variable the row number is stored in is `input$` + the name of the output of the table (`people`) + `_rows_selected`. In this instance `input$people_rows_selected`. This is used to insert the input values overwriting the previous ones using this:
+
+```{r eval=FALSE}
+  newPeopleData[input$people_rows_selected, 1] <- as.character(input$editPersonForm)
+```
+
+After this the original `peopleData` is filtered to team members who are not currently in the team and this table is attached to the `newPeopleData` created above. Then if a person has changed their name, they need to be changed in the `TeamMembers` column of the project table, so the overview pages work as you would expect. This is done using the following code:
+
+```{r eval=FALSE}
+projectData <- projectData() %>%
+  mutate_all(as.character) %>%
+  mutate(
+    TeamMembers = str_replace_all(TeamMembers, as.character(peopleData()[input$people_rows_selected, 1]), input$editPersonForm)
+  )
+
+```
+This replaces all of the original name (`peopleData()[input$people_rows_selected, 1]`) with the new name confirmed by the user (`input$editPersonsForm`) in every row of the project table.
+
+### Removing a Person
+
+When a row of the team members table is selected 2 buttons appear. One of those buttons is labelled with "Remove Team Member". When clicked a pop-up window appears saying "Are you sure you want to remove this team member?" with a confirm button. The confirm  button triggers the code that removes the team member from the `peopleData` table and the `People.csv` file. 
+
+Fully removing a Team Member from `peopleData` causs many issues. This is because all team members listed in `projectData` needs to be in the `peopleData` before the application will save any additions/changes. This means that you would have to remove their name from the project details if you wanted to make any other change to the project details. This would be an issue as the record of who worked on the project will effectively be removed. To solve this issue the column `CurrentlyInTeam` was created in `peopleData` so that the application stores a record of everyone who was listed in the tracker at some point.
+
+This is done by completing the following steps:
+
+1. `newPeopleData` is created by filtering `peopleData` to all current team members (so that the input row given can be correctly matched to the team member the user wants to delete)
+2. Then `personToRemove` is produced by filtering `newPeopleData` by the name of the person in the row selected 
+3. Rewrite the third column (`CurrentlyInTeam`) with `FALSE` in the newly creaed `personToRemove`. There now should only be one row in this table and it should be the row which the user selected
+4. Next filter the `newPeopleData` (from step 1) to not equal the row the user selected then use the `rbind` function to attach the following tables:
+    * `personToRemove`
+    * Original `peopleData` filtered to team members who are not currently in the team
+
+## Project Table Section
+
+The project table section is where all the code for adding/deleting/editing/seeing the details the different projects can be found. Therefore I will split up explaining the section using the following sub-sections:
+
+* Code to add a project
+* code to edit a project's details
+* Code to remove a project from the team
+* see the details of a project and add comments
+
+> It is important to note (similarly to the people section) that this is not the order in the code. In the code there is the ui for each of the forms for the 4 categories then the code used to actually save the inputs given by the user. I am explaining it out of order as it makes more sense to explain it this way.
+
+### Adding a Project
+
+When a user clicks the button to add a project this triggers a pop-up window to appear. This contains the form to add a project. Similarly to adding/editing a team members details, there needs to be some restrictions on what the user can enter into the data tables. This is done using different booleans similarly to adding/editing team members.
+
+Adding a project uses 3 booleans:
+
+* `newProjectNameExists`
+* `newTeamMembersDoNotExist`
+* `newProjectNameBlank`
+
+`newProjectNameExists` returns true if the name the user entered for the project exists in the `Name` field of the `projectData`
+and false otherwise
+
+`newTeamMembersDoNotExist` returns true if all the team members listed in the input are in the `Name` column from `peopleData`. This is done by counting the number of team members entered by the user that are not in the `peopleData` table. If this number is 0 or the input is empty (a project can be created without having any team members currently working on it) it returns true. 
+
+The way this is calculated is by the following line of code:
+
+```{r eval=FALSE}
+  !(((length(unlist(str_split(input$addProjectForm2, ", "))[!(unlist(str_split(input$addProjectForm2, ", ")) %in% peopleData()$Name)]) == 0))||(input$addProjectForm2==""))
+```
+
+`newProjectNameBlank` returns true if the user hasn't entered anything into the text input box for the name and false if otherwise.
+
+The error messages that will appear because of these booleans can be seen below:
+
+```{r echo=FALSE, results='asis'}
+x <-data.frame(Boolean = c("`newProjectNameExists`", "`newTeamMembersDoNotExist`", "`newProjectNameBlank`"),
+           Error.Message = c("This name is already taken, please choose another one",
+                             "Team member(s) listed above does not exist, please try again",
+                             "Add a name!"))
+
+knitr::kable(x)
+
+```
+
+The confirm button is only shown when none of the above booleans are true.
+
+When a user has entered all relevant information and has clicked confirm the code to add the project is triggered. This code is very simple. It produces a dataframe with all the same headers as `projectData` with all the information the user has just entered. This dataframe is then attached to the original `projectData` using `rbind`. This s then saved to `Projects.csv` and re-outputted in the application using the functions in the setting up section.
+
+### Editing a Project
+
+When a user selects a row in the project table 3 buttons appear to the right of the table to do the following things:
+
+* edit projects
+* remove projects
+* see the details of project
+
+When the user clicks this button a pop-up window.The pop-up window appears as there is an `observeEvent` that uses the button as its a parameter and then uses the `showModal` and`modalDialog` functions this includes several different widgets for entering the `Name`, `TeamMembers`, `Customer` fields etc. The inputs are controlled by multiple booleans like in the previous sections:
+
+```{r echo=FALSE, results='asis'}
+x <- data.frame(Boolean = c("`editedProjectNameExists`", "`editedProjectTeamMembersDoNotExist`", "`editedProjectNameBlank`"),
+                Calculation = c("This returns true if the new name is in `projectData` already unless it is the row which is selected.   This is done using this line of code: `tolower(input$editProjectForm) %in% tolower(projectData()[-input$project_rows_selected,]$Name)`",
+                              "This is the same calculation as `newTeamMembersDoNotExist` but use the correct input (`input$editProjectForm2` instead of `input$addProjectForm2`)",
+                              "This returns true if `input$editProjectForm` equals '' "),
+                Error.Message = c("This name is already taken, please choose another one",
+                                  "Team member(s) listed above does not exist, please try again. ",
+                                  "Add a name!"))
+
+knitr::kable(x)
+
+```
+
+The confirm button appears when all the above booleans are false using a `conditionalPanel`. When the user clicks confirm this triggers the block of code to run to edit a project's details in `peopleData` and in `Projects.csv`. This is font by using the rownumber of the selected row and overwriting all the information with the new user input. As the user inputs have a default value of the previous values if no changes are made the information in overwritten with the same information that was in the table previously
+ 
+### Deleting a Project
+
+As mentioned above when a user selects a row 3 buttons appear. If the user clicks the button to delete a project a pop up window will appear asking them to confirm. When clicked the chunk of code gets run to delete the projects by removing the row selected from the orginal `projectData` and saving the changes using the functions explained in the setting up section.
+
+### Getting a Project's Details
+
+As mentioned above when a user selects a row 3 buttons appear one to see the details. This causes a pop-up window to appear showing all the details of the selected project in a more readable format. In this window users can add comments and see comments previously made. These comments are stored in a column of `projectData` that are not outputted in the project table in the application.
+
+First all the data needed for the information is collected. This includes the following data sets:
+
+* updates `projectData`
+* `teamMembers` using the  `TeamMembers` field of `projectData` - only has one column `team_members`
+* `comments` using the `comments` field of `projectData` - only has one column `Comments`
+
+The above datasets are used to create some shiny outputs (outputs to put in modal which require ui tags e.g. `li()` meaning list item):
+
+* `projectComments`
+* `list` which is a list of team members
+
+Some vectors/values are also created to use in the modal. They are as follows:
+
+* `documentationText` - a vector containing 2 strings: the first being the text to output to the application, the second being CSS code to determine the style of the text outputted (colour/bold)
+* `daysToDeadline` calculates the amount of days to the deadline
+* `deadlineText` - a vector containing 2 strings: the first being the text to output to the application, the second being CSS code to determine the style of the text outputted (colour/bold)
+
+As well as the above one boolean is uesd for a conditional panel: `noDocumentation`. If a link has not been supplied to a projects documentation in the project details pop-up window it will say "No link to the documentation for this project has been given" otherwise a hyperlink will be created to the documentation which reads "Click here!"
+
+Below is a screenshot of the project details section for a project
+
+```{r, out.width= "70%", echo=FALSE}
+# Small fig.width
+library(knitr)
+include_graphics("project_details_example.png")
+```
+
+* The bullet pointed list of team members is produced using the following lines of code:
+
+    ```{r eval=FALSE}
+      output$list <- renderUI({
+        apply(teamMembers, 1, function(x) tags$li(x['team_members']))
+      })
+    ```
+    the output `list` is then rendered from within the modal functions
+* The customer information is then filled in by directly referencing the `projectData`. The following line of code does this (within the `modalDialog`):
+    ```{r eval=FALSE}
+    p(span("Customer: ", style="font-weight:bold"), projectData[input$project_rows_selected,3]),
+    
+    ```
+* The different outputs from `documentationText` can be seen below:
+    ```{r echo=FALSE, results='asis'}
+    
+    y <- data.frame(`If true...` = c("fields `ProjectBrief` and `QALog` are both true in the selected row",
+                                      "if neither of the fields `ProjectBrief` and `QALog` in the selected row are true",
+                                      "The `ProjectBrief` field is true in the selected row but the `QALog` field is false",
+                                      "The `QALog` field is true in the selected row but the `ProjectBrief` field is false"),
+                    `Text Output` = c("This project bas both a project brief and a QA log",
+                                       "This project currently has NO documentation associated with it",
+                                       "This project currently has a project brief but no QA log",
+                                       "This project has a QA log but no project brief"),
+                    `Text Style` = c("'' (just normal text)",
+                                      "color: red; font-weight: bold",
+                                      "color: red",
+                                      "color: red"))
+    
+    knitr::kable(y)
+    
+    ```
+    
+* The `DaysToDeadline` calculates the number of work days till the deadline, if the deadline has passed gives a negative number. The code to do this can be seen below:
+    ```{r eval=FALSE} 
+      daysToDeadline <- 
+    if(as.Date(projectData[input$project_rows_selected,6], "%d/%m/%Y") < Sys.Date()){ 
+      -sum(!weekdays(seq(as.Date(projectData[input$project_rows_selected,6], "%d/%m/%Y"), Sys.Date(), "days")) %in% c("Saturday", "Sunday"))
+    } else {
+      sum(!weekdays(seq(Sys.Date(), as.Date(projectData[input$project_rows_selected,6], "%d/%m/%Y"), "days")) %in% c("Saturday", "Sunday"))
+    }
+    
+    ```
+    The different outputs from `deadlineText` are as follows:
+    ```{r echo=FALSE, results='asis'}
+    x <- data.frame(`If true...` = c("The deadline for the seleted project is today's date",
+                                      "If number of days till the deadline is negative (already passed)",
+                                      "If the deadline is in the future"),
+                    `Text Output` = c("The project is due today!",
+                                       "This project is [`daysToDeadline`] working days overdue!",
+                                       "There are [`daysToDeadline`] days till the deadline for this project"),
+                    `Text Style` = c("color: red",
+                                      "color: red",
+                                      ""))
+    
+    knitr::kable(x)
+    
+    ```
+
+
+# Editing the Overview Pages
+
+## Team overview
+
+There are 3 main components to the team overview page. To create these three components there is a widget to select the team you want to see an overview of: a project table that contains all the projects being completed by team members of the selected team; a pie chart showing the RAG status of all the current projects and a bar chart of the number of projects being undertaken currently by all team members. Within each of the functions used to produce the different elements seen on the team overview page of the application call `confirmingButtons`. This is so that whenever the current user makes any changes to the data, the overview pages are updated accordingly.
+
+A reactive data set,`TeamData`, is created from both the `peopleData` and `projectData`. `TeamData` is the same as `projectData` but with an extra field `TeamsInvolved`. `TeamsInvolved` has a list of all the teams working on the project by using the `teamMembers` field and looking up where each of the involved people's teams from `peopleData`. 
+
+The options in the drop down box in the application are determined by filtering the `peopleData` to team members currently in the team and then removing the duplicates from the `Team` field. This is sorted in alphabetical order and the default value is the first team (alphabetically speaking). The widget is rendered using `renderUI`.
+
+Once `TeamData` has been created `specificTeamData` is created by filtering `TeamData` by the selected team from te drop down box. This data is outputted to the application using the function `renderDataTable`. This does not hve to call `confirmingButtons` as this is updated whenever `TeamData` is updated and `TeamData` called the `confirmingButtons` function.
+
+The `peopleInTeam` is outputted using `renderText` and filtering the `peopleData` by the team selected from the drop down box.
+
+
+### Bar chart: number of projects each team member currently has
+
+To create the bar chart with the number of projects by each team member both `projectData` and `peopleData` is used. The most complex part of creating this bar chart is getting the right dataset. The table used for the bar chart has the following fields:
+
+* `TeamMembers`
+* `NoProjects`
+* `Team`
+* `CurrentlyInTeam`
+
+A table with the above fields can be made by separating out the `TeamMembers` field of the `projectData` when `projectData` had been filtered so that all projects are not completed, and join this (`left_join`) to `peopleData` (`TeamMembers`=`Name`). This is then grouped by `TeamMembers` and summarised by how many rows with that team member:
+`
+```{r eval=FALSE}
+group_by(TeamMembers) %>%
+  summarise(NoProjects = n())
+```
+
+This produces a dataframe which has 2 fields, `TeamMembers` and `NoProjects`. This is then joined back to `peopleData` using a right join to create a dataframe with the 4 fields listed above. This is filtered to the selected team and then this dataframe is used to create the bar chart.
+
+### Pie chart: No. Projects at each RAG rating
+
+For the pie chart to show the RAG statuses clearly of all the projects the colours should represent the statuses e.g. a red RAG status should appear red. To do this the colours need to be assigned in a particular way.
+
+This starts by creating the data set to be used.  First `specificTeamData` is filtered to projects which haven't been completed, then the table is grouped by RAG status and summarised by calculating the number of projects with each status to produce the table below:
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, results='asis'}
+library(tidyverse)
+library(plotly)
+pieChartData <- data.frame(project=c(1,2,3,4,5,6,7,8,9,10), RAG = c("G", "R", "G", "G", "G", "G", "G", "A", "A", "R"))%>% group_by(RAG) %>% summarise(count = n())
+
+knitr::kable(pieChartData)
+```
+
+The first category in the table above is assigned the colour which is listed first in the vector of colours given, to ensure that the RAG status R gets assigned the colour red the vector is created using the following line of code:
+
+```{r}
+colours <- as.character(pieChartData$RAG) %>% str_replace('A', 'orange') %>% str_replace('R', 'red') %>% str_replace('G', 'green')
+```
+
+The following code is used to produce the pie chart in the application, an example can be seen below the code.
+
+```{r}
+  plot_ly(pieChartData, labels=~RAG, values=~count, type='pie', marker=list(colors=colours), height=300, width=300 ) %>%
+    layout(showlegend=FALSE, title = "RAG Status of Current Projects")
+```
+
+
+## People Overview
+
+This overview is much simpler than the team overview. This is because there is only one element. The table of projects that that the selected person. There are three sections to the code:
+
+* The team members selector
+* creating the personal data for selected person
+* output the data frame 
+
+Within the team selector the `confirmingButtons` function is called so that the people who appear in the drop down box have all the updates the current user has made. This is calculated from filtering the `Name` field of `peopleData` and finding the unique values.
+
+`personData` is created by the `projectData` being separated by the `TeamMembers` and individual rows are created for each listed team member using the function `separate_rows` which is in the package `tidyr`. `TeamMembers` is renamed to `TeamMember` as it now on;y ever includes one team member. This table is then joined with `projectTable` so that `TeamMembers` can be joined to the new table so that in the people table the other people who are working on the project can be seen. This table in then filtered so that `TeamMember` equals the selected person.
+
+This dataframe is then outputted with the following fields hidden:
+
+* `Comments`
+* `Documentation`
+* `TeamMember` as this should be the selected person for every row
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
